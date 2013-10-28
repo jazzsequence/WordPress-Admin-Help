@@ -2,11 +2,11 @@
 /**
  * Plugin Name.
  *
- * @package   Plugin_Name_Admin
- * @author    Your Name <email@example.com>
- * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2013 Your Name or Company Name
+ * @package   Admin_Help_Admin
+ * @author    Chris Reynolds <me@chrisreynolds.io>
+ * @license   GPLv3
+ * @link      http://make.wordpress.org/docs/tag/admin-help/
+ * @copyright 2013 Admin Help Team
  */
 
 /**
@@ -14,14 +14,14 @@
  * administrative side of the WordPress site.
  *
  * If you're interested in introducing public-facing
- * functionality, then refer to `class-plugin-name.php`
+ * functionality, then refer to `class-admin-help.php`
  *
  * TODO: Rename this class to a proper name for your plugin.
  *
- * @package Plugin_Name_Admin
- * @author  Your Name <email@example.com>
+ * @package Admin_Help_Admin
+ * @author  Chris Reynolds <me@chrisreynolds.io>
  */
-class Plugin_Name_Admin {
+class Admin_Help_Admin {
 
 	/**
 	 * Instance of this class.
@@ -52,12 +52,8 @@ class Plugin_Name_Admin {
 		/*
 		 * Call $plugin_slug from public plugin class.
 		 *
-		 * TODO:
-		 *
-		 * - Rename "Plugin_Name" to the name of your initial plugin class
-		 *
 		 */
-		$plugin = Plugin_Name::get_instance();
+		$plugin = Admin_Help::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		// Load admin style sheet and JavaScript.
@@ -101,10 +97,6 @@ class Plugin_Name_Admin {
 
 	/**
 	 * Register and enqueue admin-specific style sheet.
-	 * 
-	 * TODO:
-	 *
-	 * - Rename "Plugin_Name" to the name your plugin
 	 *
 	 * @since     1.0.0
 	 *
@@ -118,17 +110,13 @@ class Plugin_Name_Admin {
 
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), Plugin_Name::VERSION );
+			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), Admin_Help::VERSION );
 		}
 
 	}
 
 	/**
 	 * Register and enqueue admin-specific JavaScript.
-	 * 
-	 * TODO:
-	 *
-	 * - Rename "Plugin_Name" to the name your plugin
 	 *
 	 * @since     1.0.0
 	 *
@@ -142,7 +130,7 @@ class Plugin_Name_Admin {
 
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), Plugin_Name::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), Admin_Help::VERSION );
 		}
 
 	}

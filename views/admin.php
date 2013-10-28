@@ -5,11 +5,11 @@
  * This includes the header, options, and other information that should provide
  * The User Interface to the end user.
  *
- * @package   Plugin_Name
- * @author    Your Name <email@example.com>
- * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2013 Your Name or Company Name
+ * @package   Admin_Help
+ * @author    Chris Reynolds <me@chrisreynolds.io>
+ * @license   GPLv3
+ * @link      http://make.wordpress.org/docs/tag/admin-help/
+ * @copyright 2013 Admin Help Team
  */
 ?>
 

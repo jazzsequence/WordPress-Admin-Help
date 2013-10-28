@@ -2,11 +2,11 @@
 /**
  * Plugin Name.
  *
- * @package   Plugin_Name
- * @author    Your Name <email@example.com>
- * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2013 Your Name or Company Name
+ * @package   Admin_Help
+ * @author    Chris Reynolds <me@chrisreynolds.io>
+ * @license   GPLv3
+ * @link      http://make.wordpress.org/docs/tag/admin-help/
+ * @copyright 2013 Admin Help Team
  */
 
 /**
@@ -14,14 +14,12 @@
  * public-facing side of the WordPress site.
  *
  * If you're interested in introducing administrative or dashboard
- * functionality, then refer to `class-plugin-name-admin.php`
+ * functionality, then refer to `class-admin-help-admin.php`
  *
- * TODO: Rename this class to a proper name for your plugin.
- *
- * @package Plugin_Name
- * @author  Your Name <email@example.com>
+ * @package Admin_Help
+ * @author  Chris Reynolds <me@chrisreynolds.io>
  */
-class Plugin_Name {
+class Admin_Help {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
@@ -33,7 +31,6 @@ class Plugin_Name {
 	const VERSION = '1.0.0';
 
 	/**
-	 * TODO - Rename "plugin-name" to the name your your plugin
 	 *
 	 * Unique identifier for your plugin.
 	 *
@@ -46,7 +43,7 @@ class Plugin_Name {
 	 *
 	 * @var      string
 	 */
-	protected $plugin_slug = 'plugin-name';
+	protected $plugin_slug = 'admin-help';
 
 	/**
 	 * Instance of this class.
