@@ -12,7 +12,7 @@
  * @copyright 2013 Admin Help Team
  *
  * @wordpress-plugin
- * Plugin Name:       TODO
+ * Plugin Name:       Admin Help
  * Plugin URI:        TODO
  * Description:       TODO
  * Version:           1.0.0
