@@ -1,9 +1,5 @@
 <?php
 /**
- * The WordPress Plugin Boilerplate.
- *
- * A foundation off of which to build well-documented WordPress plugins that
- * also follow WordPress Coding Standards and PHP best practices.
  *
  * @package   Admin_Help
  * @author    Chris Reynolds <me@chrisreynolds.io>
