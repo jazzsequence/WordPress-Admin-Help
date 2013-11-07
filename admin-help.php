@@ -9,11 +9,11 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Admin Help
- * Plugin URI:        TODO
- * Description:       TODO
+ * Plugin URI:        http://wordpress.org
+ * Description:       Redefining help in the WordPress admin. A feature plugin intended for WordPress 3.9
  * Version:           1.0.0
- * Author:            TODO
- * Author URI:        TODO
+ * Author:            The WordPress Admin Help Team led by Chris Reynolds
+ * Author URI:        http://chrisreynolds.io/
  * Text Domain:       admin-help-locale
  * License:           GPLv3
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
