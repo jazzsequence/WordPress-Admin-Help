@@ -224,7 +224,16 @@ class Admin_Help_Admin {
 
 		if ( !current_user_can( 'edit_user', $user_id ) )
 			return false;
-		update_usermeta( $user_id, 'admin-help-tooltips', $_POST['admin-help-tooltips'] );
+		if ( isset( $_POST['admin_help_tooltips'] ) ) {
+			update_usermeta( $user_id, 'admin_help_tooltips', $_POST['admin_help_tooltips'] );
+		} else {
+			delete_user_meta( $user_id, 'admin_help_tooltips' );
+		}
+		if ( isset( $_POST['admin_help_overview'] ) ) {
+			update_usermeta( $user_id, 'admin_help_overview', $_POST['admin_help_overview'] );
+		} else {
+			delete_user_meta( $user_id, 'admin_help_overview' );
+		}
 
 	}
 
