@@ -61,20 +61,42 @@ class Admin_Help_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
 		// Add the options page and menu item.
-		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+		//add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
-		// Add an action link pointing to the options page.
-		$plugin_basename = plugin_basename( plugin_dir_path( __FILE__ ) . $this->plugin_slug . '.php' );
-		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
+		add_action( 'show_user_profile', 'admin_help_show_profile_fields' );
+                add_action( 'edit_user_profile', 'admin_help_show_profile_fields' );
+                
+                function admin_help_show_profile_fields( $user ) { ?>
+                <h3>Admin Help Options</h3>
 
-		/*
-		 * Define custom functionality.
-		 *
-		 * Read more about actions and filters:
-		 * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		 */
-		add_action( 'TODO', array( $this, 'action_method_name' ) );
-		add_filter( 'TODO', array( $this, 'filter_method_name' ) );
+                    <table class="form-table">
+
+                        <tr>
+			<th><label for="show_tooltips">Show Tooltips?</label></th>
+
+			<td>
+			<select name="admin-help-tooltips" id="admin-help-on-off">
+                            <option selected="selected">Select One</option>
+                            <option id="yes">Yes</option>
+                            <option id="no">No</option>
+                        </select>
+                            <span class="description">Would you like use the tooltips for help in the WordPress Admin area?</span>
+			</td>
+                        </tr>
+
+                    </table>
+                <?php }
+                
+                add_action( 'personal_options_update', 'admin_help_save_profile_fields' );
+                add_action( 'edit_user_profile_update', 'admin_help_save_profile_fields' );
+
+                function admin_help_save_profile_fields( $user_id ) {
+
+                if ( !current_user_can( 'edit_user', $user_id ) )
+		return false;
+                update_usermeta( $user_id, 'admin-help-tooltips', $_POST['admin-help-tooltips'] );
+                
+                }
 
 	}
 
@@ -140,7 +162,7 @@ class Admin_Help_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_plugin_admin_menu() {
+	//public function add_plugin_admin_menu() {
 
 		/*
 		 * Add a settings page for this plugin to the Settings menu.
@@ -156,24 +178,24 @@ class Admin_Help_Admin {
 		 * - Change 'manage_options' to the capability you see fit
 		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 		 */
-		$this->plugin_screen_hook_suffix = add_options_page(
-			__( 'Page Title', $this->plugin_slug ),
-			__( 'Menu Text', $this->plugin_slug ),
-			'manage_options',
-			$this->plugin_slug,
-			array( $this, 'display_plugin_admin_page' )
-		);
+		//$this->plugin_screen_hook_suffix = add_options_page(
+			//__( 'Admin Help Options', $this->plugin_slug ),
+			//__( 'Admin Help', $this->plugin_slug ),
+			//'manage_options',
+			//$this->plugin_slug,
+			//array( $this, 'display_plugin_admin_page' )
+		//);
 
-	}
+	//}
 
 	/**
 	 * Render the settings page for this plugin.
 	 *
 	 * @since    1.0.0
 	 */
-	public function display_plugin_admin_page() {
-		include_once( 'views/admin.php' );
-	}
+	//public function display_plugin_admin_page() {
+		//include_once( 'views/admin.php' );
+	//}
 
 	/**
 	 * Add settings action link to the plugins page.
