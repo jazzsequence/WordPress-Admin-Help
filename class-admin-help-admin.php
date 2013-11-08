@@ -16,8 +16,6 @@
  * If you're interested in introducing public-facing
  * functionality, then refer to `class-admin-help.php`
  *
- * TODO: Rename this class to a proper name for your plugin.
- *
  * @package Admin_Help_Admin
  * @author  Chris Reynolds <me@chrisreynolds.io>
  */
@@ -60,43 +58,13 @@ class Admin_Help_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
+		// user profile stuff, added by trishasalas & cleaned up by jazzs3quence
+		add_action( 'profile_personal_options', array( $this, 'admin_help_show_profile_fields' ) );
+		add_action( 'personal_options_update', array( $this, 'admin_help_save_profile_fields' ) );
+		add_action( 'edit_user_profile_update', array( $this, 'admin_help_save_profile_fields' ) );
+
 		// Add the options page and menu item.
 		//add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
-
-		add_action( 'show_user_profile', 'admin_help_show_profile_fields' );
-                add_action( 'edit_user_profile', 'admin_help_show_profile_fields' );
-                
-                function admin_help_show_profile_fields( $user ) { ?>
-                <h3>Admin Help Options</h3>
-
-                    <table class="form-table">
-
-                        <tr>
-			<th><label for="show_tooltips">Show Tooltips?</label></th>
-
-			<td>
-			<select name="admin-help-tooltips" id="admin-help-on-off">
-                            <option selected="selected">Select One</option>
-                            <option id="yes">Yes</option>
-                            <option id="no">No</option>
-                        </select>
-                            <span class="description">Would you like use the tooltips for help in the WordPress Admin area?</span>
-			</td>
-                        </tr>
-
-                    </table>
-                <?php }
-                
-                add_action( 'personal_options_update', 'admin_help_save_profile_fields' );
-                add_action( 'edit_user_profile_update', 'admin_help_save_profile_fields' );
-
-                function admin_help_save_profile_fields( $user_id ) {
-
-                if ( !current_user_can( 'edit_user', $user_id ) )
-		return false;
-                update_usermeta( $user_id, 'admin-help-tooltips', $_POST['admin-help-tooltips'] );
-                
-                }
 
 	}
 
@@ -210,6 +178,43 @@ class Admin_Help_Admin {
 			),
 			$links
 		);
+
+	}
+
+	/**
+	 * Add the new user profile settings
+	 *
+	 * @since 11082013
+	 * @author Trisha Salas
+	 */
+	public function admin_help_show_profile_fields( $user ) { ?>
+		    <table class="form-table">
+		        <tr>
+					<th><label for="show_tooltips"><?php _e( 'Show Tooltips?', 'admin-help' ); ?></label></th>
+					<td><?php // TODO turn this into checkboxes ?>
+						<select name="admin-help-tooltips" id="admin-help-on-off">
+				            <option selected="selected"><?php _e( 'Select One', 'admin-help' ); ?></option>
+				            <option id="yes" value="0"><?php _e( 'Yes', 'admin-help' ); ?></option>
+				            <option id="no" value="1"><?php _e( 'No', 'admin-help' ); ?></option>
+		        		</select>
+		            	<span class="description"><?php _e( 'Activate help tooltips for in the WordPress Admin area', 'admin-help' ); ?></span>
+					</td>
+		        </tr>
+
+		    </table>
+	<?php }
+
+	/**
+	 * Update the user meta
+	 *
+	 * @since 11082013
+	 * @author Trisha Salas
+	 */
+	public function admin_help_save_profile_fields( $user_id ) {
+
+		if ( !current_user_can( 'edit_user', $user_id ) )
+			return false;
+		update_usermeta( $user_id, 'admin-help-tooltips', $_POST['admin-help-tooltips'] );
 
 	}
 
