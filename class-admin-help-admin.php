@@ -59,8 +59,7 @@ class Admin_Help_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
 		// user profile stuff, added by trishasalas & cleaned up by jazzs3quence
-		add_action( 'show_user_profile', array( $this, 'admin_help_show_profile_fields' ) );
-		add_action( 'edit_user_profile', array( $this, 'admin_help_show_profile_fields' ) );
+		add_action( 'profile_personal_options', array( $this, 'admin_help_show_profile_fields' ) );
 		add_action( 'personal_options_update', array( $this, 'admin_help_save_profile_fields' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'admin_help_save_profile_fields' ) );
 
@@ -189,8 +188,6 @@ class Admin_Help_Admin {
 	 * @author Trisha Salas
 	 */
 	public function admin_help_show_profile_fields( $user ) { ?>
-		<h3>Admin Help Options</h3>
-
 		    <table class="form-table">
 		        <tr>
 					<th><label for="show_tooltips"><?php _e( 'Show Tooltips?', 'admin-help' ); ?></label></th>
