@@ -187,17 +187,27 @@ class Admin_Help_Admin {
 	 * @since 11082013
 	 * @author Trisha Salas
 	 */
-	public function admin_help_show_profile_fields( $user ) { ?>
+	public function admin_help_show_profile_fields( $user ) {
+		$admin_help_overview = null;
+		$admin_help_tooltips = null;
+		if ( get_user_meta( $user->ID, 'admin_help_tooltips' ) )
+			$admin_help_tooltips = get_user_meta( $user->ID, 'admin_help_tooltips' )[0];
+		if ( get_user_meta( $user->ID, 'admin_help_overview' ) )
+			$admin_help_overview = get_user_meta( $user->ID, 'admin_help_overview' )[0];
+
+	?>
 		    <table class="form-table">
 		        <tr>
-					<th><label for="show_tooltips"><?php _e( 'Show Tooltips?', 'admin-help' ); ?></label></th>
+					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'admin-help' ); ?></label></th>
 					<td><?php // TODO turn this into checkboxes ?>
-						<select name="admin-help-tooltips" id="admin-help-on-off">
-				            <option selected="selected"><?php _e( 'Select One', 'admin-help' ); ?></option>
-				            <option id="yes" value="0"><?php _e( 'Yes', 'admin-help' ); ?></option>
-				            <option id="no" value="1"><?php _e( 'No', 'admin-help' ); ?></option>
-		        		</select>
-		            	<span class="description"><?php _e( 'Activate help tooltips for in the WordPress Admin area', 'admin-help' ); ?></span>
+						<label for="help_tooltips">
+							<input type="checkbox" id="help_tooltips" name="admin_help_tooltips" value="1" <?php if ( $admin_help_tooltips ) { checked( "1", $admin_help_tooltips ); } else { echo '"checked=checked"'; } ?> />
+								<?php _e( 'Enable help tooltips.', 'admin-help' ); ?><br />
+						</label>
+						<label for="help_overview">
+							<input type="checkbox" id="help_overview" name="admin_help_overview" value="1" <?php if ( $admin_help_overview ) { checked( "1", $admin_help_overview ); } else { echo '"checked=0"'; } ?> />
+								<?php _e( 'Do not show help automatically.', 'admin-help' ); ?>
+						</label>
 					</td>
 		        </tr>
 
@@ -214,7 +224,16 @@ class Admin_Help_Admin {
 
 		if ( !current_user_can( 'edit_user', $user_id ) )
 			return false;
-		update_usermeta( $user_id, 'admin-help-tooltips', $_POST['admin-help-tooltips'] );
+		if ( isset( $_POST['admin_help_tooltips'] ) ) {
+			update_usermeta( $user_id, 'admin_help_tooltips', $_POST['admin_help_tooltips'] );
+		} else {
+			delete_user_meta( $user_id, 'admin_help_tooltips' );
+		}
+		if ( isset( $_POST['admin_help_overview'] ) ) {
+			update_usermeta( $user_id, 'admin_help_overview', $_POST['admin_help_overview'] );
+		} else {
+			delete_user_meta( $user_id, 'admin_help_overview' );
+		}
 
 	}
 
