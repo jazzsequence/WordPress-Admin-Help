@@ -9,7 +9,8 @@ module.exports = function(grunt) {
 			options: {
 				banner: 'jQuery(function( $ ) {',
 				footer: '});',
-				stripBanners: false
+				stripBanners: false,
+				// seperator: ';'
 			},
 			dist: {
 				files: {
@@ -25,7 +26,8 @@ module.exports = function(grunt) {
 				dest: 'js/',
 				ext: '.min.js',
 				src: [
-					'*.js'
+					'*.js',
+					'!*.min.js'
 				]
 			}
 		},
@@ -60,6 +62,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-sass' );
 	grunt.loadNpmTasks( 'grunt-contrib-concat' );
 
-	grunt.registerTask( 'css', ['sass', 'autoprefixer', 'cssmin']);
+	grunt.registerTask( 'css', ['sass', 'autoprefixer', 'cssmin'] );
+	grunt.registerTask( 'js', ['concat', 'uglify'] );
 	grunt.registerTask( 'default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify'] );
 };
