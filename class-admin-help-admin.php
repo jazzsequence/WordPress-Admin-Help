@@ -40,6 +40,16 @@ class Admin_Help_Admin {
 	protected $plugin_screen_hook_suffix = 'adminhelp';
 
 	/**
+	 * Help content dispalyed in tooltips. Has to remain empty because if
+	 * you try to localize text here it will throw an error.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var array
+	 */
+	protected $tooltip_help_content = array();
+
+	/**
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
 	 *
@@ -54,6 +64,8 @@ class Admin_Help_Admin {
 		$plugin = Admin_Help::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
+		load_plugin_textdomain( 'adminhelp', false, dirname( plugin_basename( __FILE__ ) ) . 'languages/' );
+
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
@@ -66,6 +78,7 @@ class Admin_Help_Admin {
 		// Add the options page and menu item.
 		//add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
+		$this->initialize_help_content();
 	}
 
 	/**
@@ -111,6 +124,8 @@ class Admin_Help_Admin {
 			} else {
 				wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
 			}
+
+			wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
 		}
 
 	}
@@ -273,4 +288,24 @@ class Admin_Help_Admin {
 		// TODO: Define your filter hook callback here
 	}
 
+	/**
+	 * Setup content in `$tooltip_help_content` since we need to be able
+	 * to localize our help strings.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	protected function initialize_help_content() {
+		$this->tooltip_help_content['addplugin'] = '<p>' . __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut nibh et libero feugiat rhoncus at id arcu. Etiam mollis turpis sed elit tincidunt posuere. Fusce nibh velit, luctus pretium dolor et, suscipit facilisis quam. Morbi id pretium lectus. Maecenas mollis quam eget blandit bibendum. Nam in posuere sem. Nullam pretium ante sit amet mi imperdiet, a placerat nisi vestibulum. Ut vel sodales libero. Nam dictum mollis felis condimentum auctor. Sed eleifend dolor urna, vitae aliquet quam accumsan in. Suspendisse feugiat, diam non gravida gravida, nisl justo suscipit nisi, id imperdiet ante tellus in velit. Fusce hendrerit porttitor sollicitudin. Sed eget lectus id elit condimentum varius.', 'adminhelp' ) . '</p>';
+	}
+
+	protected function localize_page_plugins( $parts = array() ) {
+		$strings = array();
+		foreach( $parts as $part ) {
+			$strings[ $part ] = $this->tooltip_help_content[ $part ];
+		}
+
+		return $strings;
+	}
 }

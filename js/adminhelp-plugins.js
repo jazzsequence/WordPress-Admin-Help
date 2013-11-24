@@ -3,5 +3,5 @@ jQuery(function( $ ) {adminHelp.add({
 	selector: {
 		'.add-new-h2': 'right'
 	},
-	content: 'localized content'
+	content: adminhelp_content.addplugin
 });});
