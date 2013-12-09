@@ -116,7 +116,7 @@ class Admin_Help_Admin {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), Admin_Help::VERSION );
 		}
 
-		wp_enqueue_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery' ), '1.0.0' );
+		wp_enqueue_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '1.0.0' );
 
 		if ( 'plugins' == $screen->id ) {
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {

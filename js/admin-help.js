@@ -1,11 +1,27 @@
 function AdminHelp( helpitem ) {
-	var parent = this, $ = jQuery, iconHTML = $( '<i class="icon-adminhelp">Help</i>' );
+	var parent = this, $ = jQuery, iconHTML = $( '<i class="icon-adminhelp">Help</i>' ), doc = $( document );
 
 	/**
 	 * Associative array of all help tooltips on the page
 	 * @type Array
 	 */
 	this.items = [];
+
+	/**
+	 * Do all initial setup like setting up events.
+	 */
+	this.init = function() {
+		doc.on( 'mouseover.wp-help', '.icon-adminhelp', this.openTooltip );
+		doc.on( 'mouseout.wp-help', '.icon-adminhelp', this.closeTooltip );
+		doc.tooltip({
+			items: '.icon-adminhelp',
+			content: function() {
+				var $this = $( this );
+				var item = $this.attr( 'data-slug' );
+				return parent.items[ item ].content;
+			}
+		});
+	};
 
 	/**
 	 * Take a single help object or an array of help objects and
@@ -56,27 +72,6 @@ function AdminHelp( helpitem ) {
 	};
 
 	/**
-	 * Setup and open the help tooltip for a clicked help icon
-	 *
-	 * @param  object event Object for the click event oppening the tooltip
-	 * @todo Needs to intelligently add tooltip near current help item
-	 * accounting for position on page and potential overflows
-	 */
-	this.openTooltip = function( event ) {
-
-	};
-
-	/**
-	 * Close any tooltip that is currently open
-	 *
-	 * @param  object event Object of the event triggering the close of the popup
-	 * @todo Needs to remove content from and hide the tooltip
-	 */
-	this.closeTooltip = function( event ) {
-
-	};
-
-	/**
 	 * Get tooltip content for item
 	 *
 	 * @param  string itemSlug Slug for current help item probably pulled from the `data-slug` attribute
@@ -89,6 +84,8 @@ function AdminHelp( helpitem ) {
 
 		return parent.items[ itemSlug ].content;
 	};
+
+	this.init();
 
 	// handle setup of initial help item(s)
 	this.add( helpitem );
