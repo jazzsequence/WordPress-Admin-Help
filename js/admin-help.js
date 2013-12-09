@@ -17,8 +17,12 @@ function AdminHelp( helpitem ) {
 			items: '.icon-adminhelp',
 			content: function() {
 				var $this = $( this );
-				var item = $this.attr( 'data-slug' );
-				return parent.items[ item ].content;
+				if ( $this.hasAttribute( 'data-slug' ) ){
+					var item = $this.attr( 'data-slug' );
+					return parent.items[ item ].content;
+				} else {
+					return '';
+				}
 			}
 		});
 	};
@@ -62,13 +66,20 @@ function AdminHelp( helpitem ) {
 
 	/**
 	 * Remove a help tooltip/object from the page
-	 *
-	 * @param  string itemSlug Slug of the item to Remove
-	 * @todo This function needs to find and remove the help icon for any
-	 * selectors in the item and remove help item from `parent.items`
+	 * 
+	 * @param  string|array itemSlug Slug or array of slugs of the
+	 * item(s) to Remove
 	 */
 	this.remove = function( itemSlug ) {
-
+		var i;
+		if ( typeof itemSlug === 'object' ) {
+			for ( i in itemSlug ) {
+				parent.remove( itemSlug[ i ] );
+			}
+		} else {
+			var item = parent.items[ itemSlug ];
+			$( '.icon-adminhelp[data-slug="' + item.slug + '"]' ).remove();
+		}
 	};
 
 	/**
