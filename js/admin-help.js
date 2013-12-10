@@ -11,8 +11,6 @@ function AdminHelp( helpitem ) {
 	 * Do all initial setup like setting up events.
 	 */
 	this.init = function() {
-		doc.on( 'mouseover.wp-help', '.icon-adminhelp', this.openTooltip );
-		doc.on( 'mouseout.wp-help', '.icon-adminhelp', this.closeTooltip );
 		doc.tooltip({
 			items: '.icon-adminhelp',
 			content: function() {
@@ -66,7 +64,7 @@ function AdminHelp( helpitem ) {
 
 	/**
 	 * Remove a help tooltip/object from the page
-	 * 
+	 *
 	 * @param  string|array itemSlug Slug or array of slugs of the
 	 * item(s) to Remove
 	 */
