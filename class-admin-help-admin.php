@@ -124,8 +124,8 @@ class Admin_Help_Admin {
 	 */
 	public function init() {
 		$user = wp_get_current_user();
-		$this->show_tooltips = $user->has_prop( 'admin_help_tooltips' );
-		$this->show_overview = $user->has_prop( 'admin_help_overview' );
+		$this->show_tooltips = $user->has_prop( 'admin_help_tooltips' ) ? $user->get( 'admin_help_tooltips' ) : true;
+		$this->show_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
 
 	}
 
@@ -244,12 +244,8 @@ class Admin_Help_Admin {
 	 * @author Trisha Salas
 	 */
 	public function admin_help_show_profile_fields( $user ) {
-		$admin_help_overview = null;
-		$admin_help_tooltips = null;
-		if ( get_user_meta( $user->ID, 'admin_help_tooltips' ) )
-			$admin_help_tooltips = get_user_meta( $user->ID, 'admin_help_tooltips' )[0];
-		if ( get_user_meta( $user->ID, 'admin_help_overview' ) )
-			$admin_help_overview = get_user_meta( $user->ID, 'admin_help_overview' )[0];
+		$admin_help_tooltips = $user->has_prop( 'admin_help_tooltips' ) ? $user->get( 'admin_help_tooltips' ) : true;
+		$admin_help_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
 
 	?>
 		    <table class="form-table">
@@ -257,11 +253,11 @@ class Admin_Help_Admin {
 					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'admin-help' ); ?></label></th>
 					<td><?php // TODO turn this into checkboxes ?>
 						<label for="help_tooltips">
-							<input type="checkbox" id="help_tooltips" name="admin_help_tooltips" value="1" <?php if ( $admin_help_tooltips ) { checked( "1", $admin_help_tooltips ); } else { echo '"checked=checked"'; } ?> />
+							<input type="checkbox" id="help_tooltips" name="admin_help_tooltips" value="1" <?php checked( $admin_help_tooltips ); ?> />
 								<?php _e( 'Enable help tooltips.', 'admin-help' ); ?><br />
 						</label>
 						<label for="help_overview">
-							<input type="checkbox" id="help_overview" name="admin_help_overview" value="1" <?php if ( $admin_help_overview ) { checked( "1", $admin_help_overview ); } else { echo '"checked=0"'; } ?> />
+							<input type="checkbox" id="help_overview" name="admin_help_overview" value="1" <?php checked( $admin_help_overview ); ?> />
 								<?php _e( 'Do not show help automatically.', 'admin-help' ); ?>
 						</label>
 					</td>
@@ -277,18 +273,17 @@ class Admin_Help_Admin {
 	 * @author Trisha Salas
 	 */
 	public function admin_help_save_profile_fields( $user_id ) {
-
 		if ( !current_user_can( 'edit_user', $user_id ) )
 			return false;
 		if ( isset( $_POST['admin_help_tooltips'] ) ) {
-			update_usermeta( $user_id, 'admin_help_tooltips', $_POST['admin_help_tooltips'] );
+			update_user_meta( $user_id, 'admin_help_tooltips', 1 );
 		} else {
-			delete_user_meta( $user_id, 'admin_help_tooltips' );
+			update_user_meta( $user_id, 'admin_help_tooltips', 0 );
 		}
 		if ( isset( $_POST['admin_help_overview'] ) ) {
-			update_usermeta( $user_id, 'admin_help_overview', $_POST['admin_help_overview'] );
+			update_user_meta( $user_id, 'admin_help_overview', 1 );
 		} else {
-			delete_user_meta( $user_id, 'admin_help_overview' );
+			update_user_meta( $user_id, 'admin_help_overview', 0 );
 		}
 
 	}
