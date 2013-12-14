@@ -50,6 +50,22 @@ class Admin_Help_Admin {
 	protected $tooltip_help_content = array();
 
 	/**
+	 * Whether or not to show tooltips
+	 *
+	 * @since  1.0.0
+	 * @var boolean
+	 */
+	protected $show_tooltips = true;
+
+	/**
+	 * Whether or not to show overviews
+	 *
+	 * @since  1.0.0
+	 * @var boolean
+	 */
+	protected $show_overview = true;
+
+	/**
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
 	 *
@@ -65,6 +81,8 @@ class Admin_Help_Admin {
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		load_plugin_textdomain( 'adminhelp', false, dirname( plugin_basename( __FILE__ ) ) . 'languages/' );
+
+		add_action( 'admin_init', array( $this, 'init' ) );
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
@@ -99,6 +117,19 @@ class Admin_Help_Admin {
 	}
 
 	/**
+	 * Initialize variables that can't be initialized until init.
+	 *
+	 * @since  1.0.0
+	 * @return void
+	 */
+	public function init() {
+		$user = wp_get_current_user();
+		$this->show_tooltips = $user->has_prop( 'admin_help_tooltips' );
+		$this->show_overview = $user->has_prop( 'admin_help_overview' );
+
+	}
+
+	/**
 	 * Register and enqueue admin-specific style sheet.
 	 *
 	 * @since     1.0.0
@@ -116,16 +147,16 @@ class Admin_Help_Admin {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), Admin_Help::VERSION );
 		}
 
-		wp_enqueue_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '1.0.0' );
-
-		if ( 'plugins' == $screen->id ) {
-			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-				wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
-			} else {
-				wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
+		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '1.0.0' );
+		if ( $this->show_tooltips ) {
+			if ( 'plugins' == $screen->id ) {
+				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
+				} else {
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
+				}
+				wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
 			}
-
-			wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
 		}
 
 	}
