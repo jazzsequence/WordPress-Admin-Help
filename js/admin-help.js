@@ -15,7 +15,7 @@ function AdminHelp( helpitem ) {
 			items: '.icon-adminhelp',
 			content: function() {
 				var $this = $( this );
-				if ( $this.hasAttribute( 'data-slug' ) ){
+				if ( typeof $this.attr( 'data-slug' ) == 'string' ){
 					var item = $this.attr( 'data-slug' );
 					return parent.items[ item ].content;
 				} else {
