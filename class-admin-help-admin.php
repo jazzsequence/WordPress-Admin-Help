@@ -191,9 +191,9 @@ class Admin_Help_Admin {
 		$admin_help_overview = null;
 		$admin_help_tooltips = null;
 		if ( get_user_meta( $user->ID, 'admin_help_tooltips' ) )
-			$admin_help_tooltips = get_user_meta( $user->ID, 'admin_help_tooltips' )[0];
+			$admin_help_tooltips = get_user_meta( $user->ID, 'admin_help_tooltips', true );
 		if ( get_user_meta( $user->ID, 'admin_help_overview' ) )
-			$admin_help_overview = get_user_meta( $user->ID, 'admin_help_overview' )[0];
+			$admin_help_overview = get_user_meta( $user->ID, 'admin_help_overview', true );
 
 	?>
 		    <table class="form-table">
