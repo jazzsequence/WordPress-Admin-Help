@@ -37,7 +37,33 @@ class Admin_Help_Admin {
 	 *
 	 * @var      string
 	 */
-	protected $plugin_screen_hook_suffix = null;
+	protected $plugin_screen_hook_suffix = 'adminhelp';
+
+	/**
+	 * Help content dispalyed in tooltips. Has to remain empty because if
+	 * you try to localize text here it will throw an error.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var array
+	 */
+	protected $tooltip_help_content = array();
+
+	/**
+	 * Whether or not to show tooltips
+	 *
+	 * @since  1.0.0
+	 * @var boolean
+	 */
+	protected $show_tooltips = true;
+
+	/**
+	 * Whether or not to show overviews
+	 *
+	 * @since  1.0.0
+	 * @var boolean
+	 */
+	protected $show_overview = true;
 
 	/**
 	 * Initialize the plugin by loading admin scripts & styles and adding a
@@ -54,6 +80,10 @@ class Admin_Help_Admin {
 		$plugin = Admin_Help::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
+		load_plugin_textdomain( 'adminhelp', false, dirname( plugin_basename( __FILE__ ) ) . 'languages/' );
+
+		add_action( 'admin_init', array( $this, 'init' ) );
+
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
@@ -66,6 +96,7 @@ class Admin_Help_Admin {
 		// Add the options page and menu item.
 		//add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
+		$this->initialize_help_content();
 	}
 
 	/**
@@ -86,6 +117,19 @@ class Admin_Help_Admin {
 	}
 
 	/**
+	 * Initialize variables that can't be initialized until init.
+	 *
+	 * @since  1.0.0
+	 * @return void
+	 */
+	public function init() {
+		$user = wp_get_current_user();
+		$this->show_tooltips = $user->has_prop( 'admin_help_tooltips' ) ? $user->get( 'admin_help_tooltips' ) : true;
+		$this->show_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
+
+	}
+
+	/**
 	 * Register and enqueue admin-specific style sheet.
 	 *
 	 * @since     1.0.0
@@ -101,6 +145,18 @@ class Admin_Help_Admin {
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), Admin_Help::VERSION );
+		}
+
+		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '1.0.0' );
+		if ( $this->show_tooltips ) {
+			if ( 'plugins' == $screen->id ) {
+				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
+				} else {
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
+				}
+				wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
+			}
 		}
 
 	}
@@ -188,12 +244,8 @@ class Admin_Help_Admin {
 	 * @author Trisha Salas
 	 */
 	public function admin_help_show_profile_fields( $user ) {
-		$admin_help_overview = null;
-		$admin_help_tooltips = null;
-		if ( get_user_meta( $user->ID, 'admin_help_tooltips' ) )
-			$admin_help_tooltips = get_user_meta( $user->ID, 'admin_help_tooltips', true );
-		if ( get_user_meta( $user->ID, 'admin_help_overview' ) )
-			$admin_help_overview = get_user_meta( $user->ID, 'admin_help_overview', true );
+		$admin_help_tooltips = $user->has_prop( 'admin_help_tooltips' ) ? $user->get( 'admin_help_tooltips' ) : true;
+		$admin_help_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
 
 	?>
 		    <table class="form-table">
@@ -201,11 +253,11 @@ class Admin_Help_Admin {
 					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'admin-help' ); ?></label></th>
 					<td><?php // TODO turn this into checkboxes ?>
 						<label for="help_tooltips">
-							<input type="checkbox" id="help_tooltips" name="admin_help_tooltips" value="1" <?php if ( $admin_help_tooltips ) { checked( "1", $admin_help_tooltips ); } else { echo '"checked=checked"'; } ?> />
+							<input type="checkbox" id="help_tooltips" name="admin_help_tooltips" value="1" <?php checked( $admin_help_tooltips ); ?> />
 								<?php _e( 'Enable help tooltips.', 'admin-help' ); ?><br />
 						</label>
 						<label for="help_overview">
-							<input type="checkbox" id="help_overview" name="admin_help_overview" value="1" <?php if ( $admin_help_overview ) { checked( "1", $admin_help_overview ); } else { echo '"checked=0"'; } ?> />
+							<input type="checkbox" id="help_overview" name="admin_help_overview" value="1" <?php checked( $admin_help_overview ); ?> />
 								<?php _e( 'Do not show help automatically.', 'admin-help' ); ?>
 						</label>
 					</td>
@@ -221,18 +273,17 @@ class Admin_Help_Admin {
 	 * @author Trisha Salas
 	 */
 	public function admin_help_save_profile_fields( $user_id ) {
-
 		if ( !current_user_can( 'edit_user', $user_id ) )
 			return false;
 		if ( isset( $_POST['admin_help_tooltips'] ) ) {
-			update_usermeta( $user_id, 'admin_help_tooltips', $_POST['admin_help_tooltips'] );
+			update_user_meta( $user_id, 'admin_help_tooltips', 1 );
 		} else {
-			delete_user_meta( $user_id, 'admin_help_tooltips' );
+			update_user_meta( $user_id, 'admin_help_tooltips', 0 );
 		}
 		if ( isset( $_POST['admin_help_overview'] ) ) {
-			update_usermeta( $user_id, 'admin_help_overview', $_POST['admin_help_overview'] );
+			update_user_meta( $user_id, 'admin_help_overview', 1 );
 		} else {
-			delete_user_meta( $user_id, 'admin_help_overview' );
+			update_user_meta( $user_id, 'admin_help_overview', 0 );
 		}
 
 	}
@@ -263,4 +314,24 @@ class Admin_Help_Admin {
 		// TODO: Define your filter hook callback here
 	}
 
+	/**
+	 * Setup content in `$tooltip_help_content` since we need to be able
+	 * to localize our help strings.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	protected function initialize_help_content() {
+		$this->tooltip_help_content['addplugin'] = '<p>' . __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut nibh et libero feugiat rhoncus at id arcu. Etiam mollis turpis sed elit tincidunt posuere. Fusce nibh velit, luctus pretium dolor et, suscipit facilisis quam. Morbi id pretium lectus. Maecenas mollis quam eget blandit bibendum. Nam in posuere sem. Nullam pretium ante sit amet mi imperdiet, a placerat nisi vestibulum. Ut vel sodales libero. Nam dictum mollis felis condimentum auctor. Sed eleifend dolor urna, vitae aliquet quam accumsan in. Suspendisse feugiat, diam non gravida gravida, nisl justo suscipit nisi, id imperdiet ante tellus in velit. Fusce hendrerit porttitor sollicitudin. Sed eget lectus id elit condimentum varius.', 'adminhelp' ) . '</p>';
+	}
+
+	protected function localize_page_plugins( $parts = array() ) {
+		$strings = array();
+		foreach( $parts as $part ) {
+			$strings[ $part ] = $this->tooltip_help_content[ $part ];
+		}
+
+		return $strings;
+	}
 }
