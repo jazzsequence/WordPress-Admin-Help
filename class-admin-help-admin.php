@@ -258,7 +258,7 @@ class Admin_Help_Admin {
 						</label>
 						<label for="help_overview">
 							<input type="checkbox" id="help_overview" name="admin_help_overview" value="1" <?php checked( $admin_help_overview ); ?> />
-								<?php _e( 'Do not show help automatically.', 'admin-help' ); ?>
+								<?php _e( 'Enable help overviews.', 'admin-help' ); ?>
 						</label>
 					</td>
 		        </tr>
