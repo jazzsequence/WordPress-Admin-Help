@@ -2,6 +2,7 @@ AH-O&#8322;
 ====================
 
 Breathing new life into help in the WordPress admin.
+
 A feature plugin intended for WordPress 4.0
 
 ###Screenshots

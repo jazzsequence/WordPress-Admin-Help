@@ -8,12 +8,12 @@
  * @copyright 2013 Admin Help Team
  *
  * @wordpress-plugin
- * Plugin Name:       Admin Help
+ * Plugin Name:       AH-O&#8322;
  * Plugin URI:        http://wordpress.org
- * Description:       Redefining help in the WordPress admin. A feature plugin intended for WordPress 3.9
+ * Description:       Breathing new life into help in the WordPress admin. A feature plugin intended for WordPress 4.0
  * Version:           1.0.0
- * Author:            The WordPress Admin Help Team led by Chris Reynolds
- * Author URI:        http://chrisreynolds.io/
+ * Author:            The AH-O&#8322; Team
+ * Author URI:        http://make.wordpress.org/docs/tag/admin-help/
  * Text Domain:       admin-help-locale
  * License:           GPLv3
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
