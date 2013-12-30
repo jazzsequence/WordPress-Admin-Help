@@ -182,46 +182,6 @@ class Admin_Help_Admin {
 	}
 
 	/**
-	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
-	 *
-	 * @since    1.0.0
-	 */
-	//public function add_plugin_admin_menu() {
-
-		/*
-		 * Add a settings page for this plugin to the Settings menu.
-		 *
-		 * NOTE:  Alternative menu locations are available via WordPress administration menu functions.
-		 *
-		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
-		 *
-		 * TODO:
-		 *
-		 * - Change 'Page Title' to the title of your plugin admin page
-		 * - Change 'Menu Text' to the text for menu item for the plugin settings page
-		 * - Change 'manage_options' to the capability you see fit
-		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
-		 */
-		//$this->plugin_screen_hook_suffix = add_options_page(
-			//__( 'Admin Help Options', $this->plugin_slug ),
-			//__( 'Admin Help', $this->plugin_slug ),
-			//'manage_options',
-			//$this->plugin_slug,
-			//array( $this, 'display_plugin_admin_page' )
-		//);
-
-	//}
-
-	/**
-	 * Render the settings page for this plugin.
-	 *
-	 * @since    1.0.0
-	 */
-	//public function display_plugin_admin_page() {
-		//include_once( 'views/admin.php' );
-	//}
-
-	/**
 	 * Add settings action link to the plugins page.
 	 *
 	 * @since    1.0.0
@@ -286,32 +246,6 @@ class Admin_Help_Admin {
 			update_user_meta( $user_id, 'admin_help_overview', 0 );
 		}
 
-	}
-
-	/**
-	 * NOTE:     Actions are points in the execution of a page or process
-	 *           lifecycle that WordPress fires.
-	 *
-	 *           Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function action_method_name() {
-		// TODO: Define your action hook callback here
-	}
-
-	/**
-	 * NOTE:     Filters are points of execution in which WordPress modifies data
-	 *           before saving it or sending it to the browser.
-	 *
-	 *           Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function filter_method_name() {
-		// TODO: Define your filter hook callback here
 	}
 
 	/**
