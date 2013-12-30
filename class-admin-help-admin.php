@@ -89,7 +89,7 @@ class Admin_Help_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
 		// user profile stuff, added by trishasalas & cleaned up by jazzs3quence
-		add_action( 'profile_personal_options', array( $this, 'admin_help_show_profile_fields' ) );
+		add_action( 'personal_options', array( $this, 'admin_help_show_profile_fields' ) );
 		add_action( 'personal_options_update', array( $this, 'admin_help_save_profile_fields' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'admin_help_save_profile_fields' ) );
 
@@ -208,10 +208,9 @@ class Admin_Help_Admin {
 		$admin_help_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
 
 	?>
-		    <table class="form-table">
 		        <tr>
 					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'admin-help' ); ?></label></th>
-					<td><?php // TODO turn this into checkboxes ?>
+					<td>
 						<label for="help_tooltips">
 							<input type="checkbox" id="help_tooltips" name="admin_help_tooltips" value="1" <?php checked( $admin_help_tooltips ); ?> />
 								<?php _e( 'Enable help tooltips.', 'admin-help' ); ?><br />
@@ -222,8 +221,6 @@ class Admin_Help_Admin {
 						</label>
 					</td>
 		        </tr>
-
-		    </table>
 	<?php }
 
 	/**
