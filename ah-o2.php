@@ -14,7 +14,7 @@
  * Version:           0.1.0
  * Author:            The AH-O&#8322; Team
  * Author URI:        http://make.wordpress.org/docs/tag/admin-help/
- * Text Domain:       admin-help-locale
+ * Text Domain:       ah-o2
  * License:           GPLv3
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:       /languages

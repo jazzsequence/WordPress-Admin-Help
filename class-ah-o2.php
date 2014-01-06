@@ -14,7 +14,7 @@
  * public-facing side of the WordPress site.
  *
  * If you're interested in introducing administrative or dashboard
- * functionality, then refer to `class-admin-help-admin.php`
+ * functionality, then refer to `class-ah-o2-admin.php`
  *
  * @package AH_O2
  * @author  Chris Reynolds <me@chrisreynolds.io>
@@ -43,7 +43,7 @@ class AH_O2 {
 	 *
 	 * @var      string
 	 */
-	protected $plugin_slug = 'admin-help';
+	protected $plugin_slug = 'ah-o2';
 
 	/**
 	 * Instance of this class.

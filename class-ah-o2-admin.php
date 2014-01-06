@@ -14,7 +14,7 @@
  * administrative side of the WordPress site.
  *
  * If you're interested in introducing public-facing
- * functionality, then refer to `class-admin-help.php`
+ * functionality, then refer to `class-ah-o2.php`
  *
  * @package AH_O2_Admin
  * @author  Chris Reynolds <me@chrisreynolds.io>
@@ -209,16 +209,19 @@ class AH_O2_Admin {
 
 	?>
 		        <tr>
-					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'admin-help' ); ?></label></th>
+					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'ah-o2' ); ?></label></th>
 					<td>
 						<label for="help_tooltips">
 							<input type="checkbox" id="help_tooltips" name="AH_O2_tooltips" value="1" <?php checked( $AH_O2_tooltips ); ?> />
-								<?php _e( 'Enable help tooltips.', 'admin-help' ); ?><br />
+								<?php _e( 'Enable help tooltips.', 'ah-o2' ); ?><br />
 						</label>
+						<!--
+						 // Hiding this for now
 						<label for="help_overview">
 							<input type="checkbox" id="help_overview" name="AH_O2_overview" value="1" <?php checked( $AH_O2_overview ); ?> />
-								<?php _e( 'Enable help overviews.', 'admin-help' ); ?>
+								<?php _e( 'Enable help overviews.', 'ah-o2' ); ?>
 						</label>
+						-->
 					</td>
 		        </tr>
 	<?php }
@@ -254,7 +257,7 @@ class AH_O2_Admin {
 	 * @return void
 	 */
 	protected function initialize_help_content() {
-		$this->tooltip_help_content['addplugin'] = '<p>' . __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut nibh et libero feugiat rhoncus at id arcu. Etiam mollis turpis sed elit tincidunt posuere. Fusce nibh velit, luctus pretium dolor et, suscipit facilisis quam. Morbi id pretium lectus. Maecenas mollis quam eget blandit bibendum. Nam in posuere sem. Nullam pretium ante sit amet mi imperdiet, a placerat nisi vestibulum. Ut vel sodales libero. Nam dictum mollis felis condimentum auctor. Sed eleifend dolor urna, vitae aliquet quam accumsan in. Suspendisse feugiat, diam non gravida gravida, nisl justo suscipit nisi, id imperdiet ante tellus in velit. Fusce hendrerit porttitor sollicitudin. Sed eget lectus id elit condimentum varius.', 'adminhelp' ) . '</p>';
+		$this->tooltip_help_content['addplugin'] = '<p>' . __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut nibh et libero feugiat rhoncus at id arcu. Etiam mollis turpis sed elit tincidunt posuere. Fusce nibh velit, luctus pretium dolor et, suscipit facilisis quam. Morbi id pretium lectus. Maecenas mollis quam eget blandit bibendum. Nam in posuere sem. Nullam pretium ante sit amet mi imperdiet, a placerat nisi vestibulum. Ut vel sodales libero. Nam dictum mollis felis condimentum auctor. Sed eleifend dolor urna, vitae aliquet quam accumsan in. Suspendisse feugiat, diam non gravida gravida, nisl justo suscipit nisi, id imperdiet ante tellus in velit. Fusce hendrerit porttitor sollicitudin. Sed eget lectus id elit condimentum varius.', 'ah-o2' ) . '</p>';
 	}
 
 	protected function localize_page_plugins( $parts = array() ) {
