@@ -26,8 +26,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'class-admin-help.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'class-admin-help-admin.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'class-ah-o2.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'class-ah-o2-admin.php' );
 
 /*
  * Register hooks that are fired when the plugin is activated or deactivated.
