@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * @package   Admin_Help
+ * @package   AH_O2
  * @author    Chris Reynolds <me@chrisreynolds.io>
  * @license   GPLv3
  * @link      http://make.wordpress.org/docs/tag/admin-help/
@@ -33,8 +33,8 @@ require_once( plugin_dir_path( __FILE__ ) . 'class-admin-help-admin.php' );
  * Register hooks that are fired when the plugin is activated or deactivated.
  * When the plugin is deleted, the uninstall.php file is loaded.
  */
-register_activation_hook( __FILE__, array( 'Admin_Help', 'activate' ) );
-register_deactivation_hook( __FILE__, array( 'Admin_Help', 'deactivate' ) );
+register_activation_hook( __FILE__, array( 'AH_O2', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'AH_O2', 'deactivate' ) );
 
-add_action( 'plugins_loaded', array( 'Admin_Help', 'get_instance' ) );
-add_action( 'plugins_loaded', array( 'Admin_Help_Admin', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'AH_O2', 'get_instance' ) );
+add_action( 'plugins_loaded', array( 'AH_O2_Admin', 'get_instance' ) );

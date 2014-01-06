@@ -2,7 +2,7 @@
 /**
  * Plugin Name.
  *
- * @package   Admin_Help_Admin
+ * @package   AH_O2_Admin
  * @author    Chris Reynolds <me@chrisreynolds.io>
  * @license   GPLv3
  * @link      http://make.wordpress.org/docs/tag/admin-help/
@@ -16,10 +16,10 @@
  * If you're interested in introducing public-facing
  * functionality, then refer to `class-admin-help.php`
  *
- * @package Admin_Help_Admin
+ * @package AH_O2_Admin
  * @author  Chris Reynolds <me@chrisreynolds.io>
  */
-class Admin_Help_Admin {
+class AH_O2_Admin {
 
 	/**
 	 * Instance of this class.
@@ -77,7 +77,7 @@ class Admin_Help_Admin {
 		 * Call $plugin_slug from public plugin class.
 		 *
 		 */
-		$plugin = Admin_Help::get_instance();
+		$plugin = AH_O2::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		load_plugin_textdomain( 'adminhelp', false, dirname( plugin_basename( __FILE__ ) ) . 'languages/' );
@@ -89,9 +89,9 @@ class Admin_Help_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
 		// user profile stuff, added by trishasalas & cleaned up by jazzs3quence
-		add_action( 'personal_options', array( $this, 'admin_help_show_profile_fields' ) );
-		add_action( 'personal_options_update', array( $this, 'admin_help_save_profile_fields' ) );
-		add_action( 'edit_user_profile_update', array( $this, 'admin_help_save_profile_fields' ) );
+		add_action( 'personal_options', array( $this, 'AH_O2_show_profile_fields' ) );
+		add_action( 'personal_options_update', array( $this, 'AH_O2_save_profile_fields' ) );
+		add_action( 'edit_user_profile_update', array( $this, 'AH_O2_save_profile_fields' ) );
 
 		// Add the options page and menu item.
 		//add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
@@ -124,8 +124,8 @@ class Admin_Help_Admin {
 	 */
 	public function init() {
 		$user = wp_get_current_user();
-		$this->show_tooltips = $user->has_prop( 'admin_help_tooltips' ) ? $user->get( 'admin_help_tooltips' ) : true;
-		$this->show_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
+		$this->show_tooltips = $user->has_prop( 'AH_O2_tooltips' ) ? $user->get( 'AH_O2_tooltips' ) : true;
+		$this->show_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : true;
 
 	}
 
@@ -144,7 +144,7 @@ class Admin_Help_Admin {
 
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), Admin_Help::VERSION );
+			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), AH_O2::VERSION );
 		}
 
 		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '0.1.0' );
@@ -176,7 +176,7 @@ class Admin_Help_Admin {
 
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), Admin_Help::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), AH_O2::VERSION );
 		}
 
 	}
@@ -203,20 +203,20 @@ class Admin_Help_Admin {
 	 * @since 11082013
 	 * @author Trisha Salas
 	 */
-	public function admin_help_show_profile_fields( $user ) {
-		$admin_help_tooltips = $user->has_prop( 'admin_help_tooltips' ) ? $user->get( 'admin_help_tooltips' ) : true;
-		$admin_help_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
+	public function AH_O2_show_profile_fields( $user ) {
+		$AH_O2_tooltips = $user->has_prop( 'AH_O2_tooltips' ) ? $user->get( 'AH_O2_tooltips' ) : true;
+		$AH_O2_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : true;
 
 	?>
 		        <tr>
 					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'admin-help' ); ?></label></th>
 					<td>
 						<label for="help_tooltips">
-							<input type="checkbox" id="help_tooltips" name="admin_help_tooltips" value="1" <?php checked( $admin_help_tooltips ); ?> />
+							<input type="checkbox" id="help_tooltips" name="AH_O2_tooltips" value="1" <?php checked( $AH_O2_tooltips ); ?> />
 								<?php _e( 'Enable help tooltips.', 'admin-help' ); ?><br />
 						</label>
 						<label for="help_overview">
-							<input type="checkbox" id="help_overview" name="admin_help_overview" value="1" <?php checked( $admin_help_overview ); ?> />
+							<input type="checkbox" id="help_overview" name="AH_O2_overview" value="1" <?php checked( $AH_O2_overview ); ?> />
 								<?php _e( 'Enable help overviews.', 'admin-help' ); ?>
 						</label>
 					</td>
@@ -229,18 +229,18 @@ class Admin_Help_Admin {
 	 * @since 11082013
 	 * @author Trisha Salas
 	 */
-	public function admin_help_save_profile_fields( $user_id ) {
+	public function AH_O2_save_profile_fields( $user_id ) {
 		if ( !current_user_can( 'edit_user', $user_id ) )
 			return false;
-		if ( isset( $_POST['admin_help_tooltips'] ) ) {
-			update_user_meta( $user_id, 'admin_help_tooltips', 1 );
+		if ( isset( $_POST['AH_O2_tooltips'] ) ) {
+			update_user_meta( $user_id, 'AH_O2_tooltips', 1 );
 		} else {
-			update_user_meta( $user_id, 'admin_help_tooltips', 0 );
+			update_user_meta( $user_id, 'AH_O2_tooltips', 0 );
 		}
-		if ( isset( $_POST['admin_help_overview'] ) ) {
-			update_user_meta( $user_id, 'admin_help_overview', 1 );
+		if ( isset( $_POST['AH_O2_overview'] ) ) {
+			update_user_meta( $user_id, 'AH_O2_overview', 1 );
 		} else {
-			update_user_meta( $user_id, 'admin_help_overview', 0 );
+			update_user_meta( $user_id, 'AH_O2_overview', 0 );
 		}
 
 	}

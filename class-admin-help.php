@@ -2,7 +2,7 @@
 /**
  * Plugin Name.
  *
- * @package   Admin_Help
+ * @package   AH_O2
  * @author    Chris Reynolds <me@chrisreynolds.io>
  * @license   GPLv3
  * @link      http://make.wordpress.org/docs/tag/admin-help/
@@ -16,10 +16,10 @@
  * If you're interested in introducing administrative or dashboard
  * functionality, then refer to `class-admin-help-admin.php`
  *
- * @package Admin_Help
+ * @package AH_O2
  * @author  Chris Reynolds <me@chrisreynolds.io>
  */
-class Admin_Help {
+class AH_O2 {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
