@@ -24,7 +24,7 @@ class Admin_Help_Admin {
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 * @var      object
 	 */
@@ -33,7 +33,7 @@ class Admin_Help_Admin {
 	/**
 	 * Slug of the plugin screen.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 * @var      string
 	 */
@@ -43,7 +43,7 @@ class Admin_Help_Admin {
 	 * Help content dispalyed in tooltips. Has to remain empty because if
 	 * you try to localize text here it will throw an error.
 	 *
-	 * @since 1.0.0
+	 * @since 0.1.0
 	 *
 	 * @var array
 	 */
@@ -52,7 +52,7 @@ class Admin_Help_Admin {
 	/**
 	 * Whether or not to show tooltips
 	 *
-	 * @since  1.0.0
+	 * @since  0.1.0
 	 * @var boolean
 	 */
 	protected $show_tooltips = true;
@@ -60,7 +60,7 @@ class Admin_Help_Admin {
 	/**
 	 * Whether or not to show overviews
 	 *
-	 * @since  1.0.0
+	 * @since  0.1.0
 	 * @var boolean
 	 */
 	protected $show_overview = true;
@@ -69,7 +69,7 @@ class Admin_Help_Admin {
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
 	 *
-	 * @since     1.0.0
+	 * @since     0.1.0
 	 */
 	private function __construct() {
 
@@ -102,7 +102,7 @@ class Admin_Help_Admin {
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     1.0.0
+	 * @since     0.1.0
 	 *
 	 * @return    object    A single instance of this class.
 	 */
@@ -119,7 +119,7 @@ class Admin_Help_Admin {
 	/**
 	 * Initialize variables that can't be initialized until init.
 	 *
-	 * @since  1.0.0
+	 * @since  0.1.0
 	 * @return void
 	 */
 	public function init() {
@@ -132,7 +132,7 @@ class Admin_Help_Admin {
 	/**
 	 * Register and enqueue admin-specific style sheet.
 	 *
-	 * @since     1.0.0
+	 * @since     0.1.0
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
@@ -147,13 +147,13 @@ class Admin_Help_Admin {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), Admin_Help::VERSION );
 		}
 
-		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '1.0.0' );
+		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '0.1.0' );
 		if ( $this->show_tooltips ) {
 			if ( 'plugins' == $screen->id ) {
 				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
 				} else {
-					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
 				}
 				wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
 			}
@@ -164,7 +164,7 @@ class Admin_Help_Admin {
 	/**
 	 * Register and enqueue admin-specific JavaScript.
 	 *
-	 * @since     1.0.0
+	 * @since     0.1.0
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
@@ -184,7 +184,7 @@ class Admin_Help_Admin {
 	/**
 	 * Add settings action link to the plugins page.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 */
 	public function add_action_links( $links ) {
 
@@ -249,7 +249,7 @@ class Admin_Help_Admin {
 	 * Setup content in `$tooltip_help_content` since we need to be able
 	 * to localize our help strings.
 	 *
-	 * @since 1.0.0
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 */

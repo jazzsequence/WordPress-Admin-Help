@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the TODO package.
 msgid ""
 msgstr ""
-"Project-Id-Version: TODO 1.0.0\n"
+"Project-Id-Version: TODO 0.1.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/admin-help\n"
 "POT-Creation-Date: 2013-05-10 11:23:19+00:00\n"
 "PO-Revision-Date: 2013-05-10 10:37-0500\n"
