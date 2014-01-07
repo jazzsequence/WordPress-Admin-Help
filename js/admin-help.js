@@ -1,5 +1,5 @@
 function AdminHelp( helpitem ) {
-	var parent = this, $ = jQuery, iconHTML = $( '<i class="icon-adminhelp">Help</i>' ), doc = $( document );
+	var parent = this, $ = jQuery, doc = $( document );
 
 	/**
 	 * Associative array of all help tooltips on the page
@@ -12,10 +12,10 @@ function AdminHelp( helpitem ) {
 	 */
 	this.init = function() {
 		doc.tooltip({
-			items: '.icon-adminhelp',
+			items: '.tip-adminhelp',
 			content: function() {
 				var $this = $( this );
-				if ( $this.hasAttribute( 'data-slug' ) ){
+				if ( typeof $this.attr( 'data-slug' ) == 'string' ){
 					var item = $this.attr( 'data-slug' );
 					return parent.items[ item ].content;
 				} else {
@@ -43,13 +43,8 @@ function AdminHelp( helpitem ) {
 
 			// setup help icon
 			for ( var selector in item.selector ) {
-				tmpIcon = iconHTML.clone();
-				tmpIcon.attr( 'data-slug', item.slug );
-				if ( 'right' == item.selector[ selector ] ) {
-					$( selector ).after( tmpIcon );
-				} else {
-					$( selector ).before( tmpIcon );
-				}
+				$( selector ).attr( 'data-slug', item.slug );
+				$( selector ).addClass( 'tip-adminhelp' );
 			}
 		}
 
@@ -76,7 +71,7 @@ function AdminHelp( helpitem ) {
 			}
 		} else {
 			var item = parent.items[ itemSlug ];
-			$( '.icon-adminhelp[data-slug="' + item.slug + '"]' ).remove();
+			$( '.tip-adminhelp[data-slug="' + item.slug + '"]' ).remove();
 		}
 	};
 

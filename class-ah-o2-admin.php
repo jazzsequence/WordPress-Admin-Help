@@ -2,7 +2,7 @@
 /**
  * Plugin Name.
  *
- * @package   Admin_Help_Admin
+ * @package   AH_O2_Admin
  * @author    Chris Reynolds <me@chrisreynolds.io>
  * @license   GPLv3
  * @link      http://make.wordpress.org/docs/tag/admin-help/
@@ -14,17 +14,17 @@
  * administrative side of the WordPress site.
  *
  * If you're interested in introducing public-facing
- * functionality, then refer to `class-admin-help.php`
+ * functionality, then refer to `class-ah-o2.php`
  *
- * @package Admin_Help_Admin
+ * @package AH_O2_Admin
  * @author  Chris Reynolds <me@chrisreynolds.io>
  */
-class Admin_Help_Admin {
+class AH_O2_Admin {
 
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 * @var      object
 	 */
@@ -33,7 +33,7 @@ class Admin_Help_Admin {
 	/**
 	 * Slug of the plugin screen.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 * @var      string
 	 */
@@ -43,7 +43,7 @@ class Admin_Help_Admin {
 	 * Help content dispalyed in tooltips. Has to remain empty because if
 	 * you try to localize text here it will throw an error.
 	 *
-	 * @since 1.0.0
+	 * @since 0.1.0
 	 *
 	 * @var array
 	 */
@@ -52,7 +52,7 @@ class Admin_Help_Admin {
 	/**
 	 * Whether or not to show tooltips
 	 *
-	 * @since  1.0.0
+	 * @since  0.1.0
 	 * @var boolean
 	 */
 	protected $show_tooltips = true;
@@ -60,7 +60,7 @@ class Admin_Help_Admin {
 	/**
 	 * Whether or not to show overviews
 	 *
-	 * @since  1.0.0
+	 * @since  0.1.0
 	 * @var boolean
 	 */
 	protected $show_overview = true;
@@ -69,7 +69,7 @@ class Admin_Help_Admin {
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
 	 *
-	 * @since     1.0.0
+	 * @since     0.1.0
 	 */
 	private function __construct() {
 
@@ -77,7 +77,7 @@ class Admin_Help_Admin {
 		 * Call $plugin_slug from public plugin class.
 		 *
 		 */
-		$plugin = Admin_Help::get_instance();
+		$plugin = AH_O2::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		load_plugin_textdomain( 'adminhelp', false, dirname( plugin_basename( __FILE__ ) ) . 'languages/' );
@@ -89,38 +89,20 @@ class Admin_Help_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
 		// user profile stuff, added by trishasalas & cleaned up by jazzs3quence
-		add_action( 'personal_options', array( $this, 'admin_help_show_profile_fields' ) );
-		add_action( 'personal_options_update', array( $this, 'admin_help_save_profile_fields' ) );
-		add_action( 'edit_user_profile_update', array( $this, 'admin_help_save_profile_fields' ) );
+		add_action( 'personal_options', array( $this, 'AH_O2_show_profile_fields' ) );
+		add_action( 'personal_options_update', array( $this, 'AH_O2_save_profile_fields' ) );
+		add_action( 'edit_user_profile_update', array( $this, 'AH_O2_save_profile_fields' ) );
 
-		// hook into in_admin_header action to overwrite wp_screen object
-		add_action( 'in_admin_header', array( $this, 'modify_wp_screen' ) );
-		
+		// Add the options page and menu item.
+		//add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+
 		$this->initialize_help_content();
-	}
-	
-	/**
-	 * Overwrite the WP_Screen object and also allow for modification of content.
-	 * 
-	 */
-	function modify_wp_screen(  ) {
-		global $current_screen;
-		$current_screen = new WP_Screen_Admin( $current_screen );
-		
-		// Modify Help Content
-		if ( $current_screen->id == 'plugins' ) {
-			$current_screen->add_help_tab( array(
-				'id'      => 'New Help',
-				'title'   => __('New Help'),
-				'content' => '<p>Random Help Text</p><p>More Content</p>',
-			) );
-		}
 	}
 
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     1.0.0
+	 * @since     0.1.0
 	 *
 	 * @return    object    A single instance of this class.
 	 */
@@ -137,36 +119,35 @@ class Admin_Help_Admin {
 	/**
 	 * Initialize variables that can't be initialized until init.
 	 *
-	 * @since  1.0.0
+	 * @since  0.1.0
 	 * @return void
 	 */
 	public function init() {
 		$user = wp_get_current_user();
-		$this->show_tooltips = $user->has_prop( 'admin_help_tooltips' ) ? $user->get( 'admin_help_tooltips' ) : true;
-		$this->show_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
+		$this->show_tooltips = $user->has_prop( 'AH_O2_tooltips' ) ? $user->get( 'AH_O2_tooltips' ) : true;
+		$this->show_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : true;
 
 	}
 
 	/**
 	 * Register and enqueue admin-specific style sheet.
 	 *
-	 * @since     1.0.0
+	 * @since     0.1.0
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_styles() {
 
-		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
-			return;
-		}
+		$screen = get_current_screen();
+		wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), AH_O2::VERSION );
 
-		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '1.0.0' );
+		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '0.1.0' );
 		if ( $this->show_tooltips ) {
 			if ( 'plugins' == $screen->id ) {
 				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
 				} else {
-					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '1.0.0' );
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
 				}
 				wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
 			}
@@ -177,7 +158,7 @@ class Admin_Help_Admin {
 	/**
 	 * Register and enqueue admin-specific JavaScript.
 	 *
-	 * @since     1.0.0
+	 * @since     0.1.0
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
@@ -189,7 +170,7 @@ class Admin_Help_Admin {
 
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), Admin_Help::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), AH_O2::VERSION );
 		}
 
 	}
@@ -197,7 +178,7 @@ class Admin_Help_Admin {
 	/**
 	 * Add settings action link to the plugins page.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 */
 	public function add_action_links( $links ) {
 
@@ -216,22 +197,25 @@ class Admin_Help_Admin {
 	 * @since 11082013
 	 * @author Trisha Salas
 	 */
-	public function admin_help_show_profile_fields( $user ) {
-		$admin_help_tooltips = $user->has_prop( 'admin_help_tooltips' ) ? $user->get( 'admin_help_tooltips' ) : true;
-		$admin_help_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
+	public function AH_O2_show_profile_fields( $user ) {
+		$AH_O2_tooltips = $user->has_prop( 'AH_O2_tooltips' ) ? $user->get( 'AH_O2_tooltips' ) : true;
+		$AH_O2_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : true;
 
 	?>
 		        <tr>
-					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'admin-help' ); ?></label></th>
+					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'ah-o2' ); ?></label></th>
 					<td>
 						<label for="help_tooltips">
-							<input type="checkbox" id="help_tooltips" name="admin_help_tooltips" value="1" <?php checked( $admin_help_tooltips ); ?> />
-								<?php _e( 'Enable help tooltips.', 'admin-help' ); ?><br />
+							<input type="checkbox" id="help_tooltips" name="AH_O2_tooltips" value="1" <?php checked( $AH_O2_tooltips ); ?> />
+								<?php _e( 'Enable help tooltips.', 'ah-o2' ); ?><br />
 						</label>
+						<!--
+						 // Hiding this for now
 						<label for="help_overview">
-							<input type="checkbox" id="help_overview" name="admin_help_overview" value="1" <?php checked( $admin_help_overview ); ?> />
-								<?php _e( 'Enable help overviews.', 'admin-help' ); ?>
+							<input type="checkbox" id="help_overview" name="AH_O2_overview" value="1" <?php checked( $AH_O2_overview ); ?> />
+								<?php _e( 'Enable help overviews.', 'ah-o2' ); ?>
 						</label>
+						-->
 					</td>
 		        </tr>
 	<?php }
@@ -242,18 +226,18 @@ class Admin_Help_Admin {
 	 * @since 11082013
 	 * @author Trisha Salas
 	 */
-	public function admin_help_save_profile_fields( $user_id ) {
+	public function AH_O2_save_profile_fields( $user_id ) {
 		if ( !current_user_can( 'edit_user', $user_id ) )
 			return false;
-		if ( isset( $_POST['admin_help_tooltips'] ) ) {
-			update_user_meta( $user_id, 'admin_help_tooltips', 1 );
+		if ( isset( $_POST['AH_O2_tooltips'] ) ) {
+			update_user_meta( $user_id, 'AH_O2_tooltips', 1 );
 		} else {
-			update_user_meta( $user_id, 'admin_help_tooltips', 0 );
+			update_user_meta( $user_id, 'AH_O2_tooltips', 0 );
 		}
-		if ( isset( $_POST['admin_help_overview'] ) ) {
-			update_user_meta( $user_id, 'admin_help_overview', 1 );
+		if ( isset( $_POST['AH_O2_overview'] ) ) {
+			update_user_meta( $user_id, 'AH_O2_overview', 1 );
 		} else {
-			update_user_meta( $user_id, 'admin_help_overview', 0 );
+			update_user_meta( $user_id, 'AH_O2_overview', 0 );
 		}
 
 	}
@@ -262,12 +246,12 @@ class Admin_Help_Admin {
 	 * Setup content in `$tooltip_help_content` since we need to be able
 	 * to localize our help strings.
 	 *
-	 * @since 1.0.0
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 */
 	protected function initialize_help_content() {
-		$this->tooltip_help_content['addplugin'] = '<p>' . __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut nibh et libero feugiat rhoncus at id arcu. Etiam mollis turpis sed elit tincidunt posuere. Fusce nibh velit, luctus pretium dolor et, suscipit facilisis quam. Morbi id pretium lectus. Maecenas mollis quam eget blandit bibendum. Nam in posuere sem. Nullam pretium ante sit amet mi imperdiet, a placerat nisi vestibulum. Ut vel sodales libero. Nam dictum mollis felis condimentum auctor. Sed eleifend dolor urna, vitae aliquet quam accumsan in. Suspendisse feugiat, diam non gravida gravida, nisl justo suscipit nisi, id imperdiet ante tellus in velit. Fusce hendrerit porttitor sollicitudin. Sed eget lectus id elit condimentum varius.', 'adminhelp' ) . '</p>';
+		$this->tooltip_help_content['addplugin'] = '<p>' . __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut nibh et libero feugiat rhoncus at id arcu. Etiam mollis turpis sed elit tincidunt posuere. Fusce nibh velit, luctus pretium dolor et, suscipit facilisis quam. Morbi id pretium lectus. Maecenas mollis quam eget blandit bibendum. Nam in posuere sem. Nullam pretium ante sit amet mi imperdiet, a placerat nisi vestibulum. Ut vel sodales libero. Nam dictum mollis felis condimentum auctor. Sed eleifend dolor urna, vitae aliquet quam accumsan in. Suspendisse feugiat, diam non gravida gravida, nisl justo suscipit nisi, id imperdiet ante tellus in velit. Fusce hendrerit porttitor sollicitudin. Sed eget lectus id elit condimentum varius.', 'ah-o2' ) . '</p>';
 	}
 
 	protected function localize_page_plugins( $parts = array() ) {

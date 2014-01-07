@@ -1,7 +1,9 @@
-WordPress-Admin-Help
+AH-O&#8322;
 ====================
 
-Redefining help in the WordPress admin. A feature plugin intended for WordPress 3.9
+Breathing new life into help in the WordPress admin.
+
+A feature plugin intended for WordPress 4.0
 
 ###Screenshots
 #####This is what we're shooting for:

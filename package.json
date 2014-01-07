@@ -1,15 +1,15 @@
 {
   "name": "WordPressAdminHelp",
-  "version": "1.0.0",
-  "description": "Redefining help in the WordPress admin. A feature plugin intended for WordPress 3.9",
+  "version": "0.1.0",
+  "description": "Redefining help in the WordPress admin. A feature plugin intended for WordPress 4.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ninnypants/WordPress-Admin-Help.git"
+    "url": "git://github.com/jazzsequence/WordPress-Admin-Help.git"
   },
-  "author": "The WordPress Admin Help Team",
+  "author": "The AH-O&#8322; Team",
   "license": "GPLv3",
   "bugs": {
-    "url": "https://github.com/ninnypants/WordPress-Admin-Help/issues"
+    "url": "https://github.com/jazzsequence/WordPress-Admin-Help/issues"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
