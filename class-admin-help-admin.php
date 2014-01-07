@@ -89,14 +89,32 @@ class Admin_Help_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
 		// user profile stuff, added by trishasalas & cleaned up by jazzs3quence
-		add_action( 'profile_personal_options', array( $this, 'admin_help_show_profile_fields' ) );
+		add_action( 'personal_options', array( $this, 'admin_help_show_profile_fields' ) );
 		add_action( 'personal_options_update', array( $this, 'admin_help_save_profile_fields' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'admin_help_save_profile_fields' ) );
 
-		// Add the options page and menu item.
-		//add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
-
+		// hook into in_admin_header action to overwrite wp_screen object
+		add_action( 'in_admin_header', array( $this, 'modify_wp_screen' ) );
+		
 		$this->initialize_help_content();
+	}
+	
+	/**
+	 * Overwrite the WP_Screen object and also allow for modification of content.
+	 * 
+	 */
+	function modify_wp_screen(  ) {
+		global $current_screen;
+		$current_screen = new WP_Screen_Admin( $current_screen );
+		
+		// Modify Help Content
+		if ( $current_screen->id == 'plugins' ) {
+			$current_screen->add_help_tab( array(
+				'id'      => 'New Help',
+				'title'   => __('New Help'),
+				'content' => '<p>Random Help Text</p><p>More Content</p>',
+			) );
+		}
 	}
 
 	/**
@@ -142,11 +160,6 @@ class Admin_Help_Admin {
 			return;
 		}
 
-		$screen = get_current_screen();
-		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), Admin_Help::VERSION );
-		}
-
 		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '1.0.0' );
 		if ( $this->show_tooltips ) {
 			if ( 'plugins' == $screen->id ) {
@@ -182,46 +195,6 @@ class Admin_Help_Admin {
 	}
 
 	/**
-	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
-	 *
-	 * @since    1.0.0
-	 */
-	//public function add_plugin_admin_menu() {
-
-		/*
-		 * Add a settings page for this plugin to the Settings menu.
-		 *
-		 * NOTE:  Alternative menu locations are available via WordPress administration menu functions.
-		 *
-		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
-		 *
-		 * TODO:
-		 *
-		 * - Change 'Page Title' to the title of your plugin admin page
-		 * - Change 'Menu Text' to the text for menu item for the plugin settings page
-		 * - Change 'manage_options' to the capability you see fit
-		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
-		 */
-		//$this->plugin_screen_hook_suffix = add_options_page(
-			//__( 'Admin Help Options', $this->plugin_slug ),
-			//__( 'Admin Help', $this->plugin_slug ),
-			//'manage_options',
-			//$this->plugin_slug,
-			//array( $this, 'display_plugin_admin_page' )
-		//);
-
-	//}
-
-	/**
-	 * Render the settings page for this plugin.
-	 *
-	 * @since    1.0.0
-	 */
-	//public function display_plugin_admin_page() {
-		//include_once( 'views/admin.php' );
-	//}
-
-	/**
 	 * Add settings action link to the plugins page.
 	 *
 	 * @since    1.0.0
@@ -248,22 +221,19 @@ class Admin_Help_Admin {
 		$admin_help_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
 
 	?>
-		    <table class="form-table">
 		        <tr>
 					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'admin-help' ); ?></label></th>
-					<td><?php // TODO turn this into checkboxes ?>
+					<td>
 						<label for="help_tooltips">
 							<input type="checkbox" id="help_tooltips" name="admin_help_tooltips" value="1" <?php checked( $admin_help_tooltips ); ?> />
 								<?php _e( 'Enable help tooltips.', 'admin-help' ); ?><br />
 						</label>
 						<label for="help_overview">
 							<input type="checkbox" id="help_overview" name="admin_help_overview" value="1" <?php checked( $admin_help_overview ); ?> />
-								<?php _e( 'Do not show help automatically.', 'admin-help' ); ?>
+								<?php _e( 'Enable help overviews.', 'admin-help' ); ?>
 						</label>
 					</td>
 		        </tr>
-
-		    </table>
 	<?php }
 
 	/**
@@ -286,32 +256,6 @@ class Admin_Help_Admin {
 			update_user_meta( $user_id, 'admin_help_overview', 0 );
 		}
 
-	}
-
-	/**
-	 * NOTE:     Actions are points in the execution of a page or process
-	 *           lifecycle that WordPress fires.
-	 *
-	 *           Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function action_method_name() {
-		// TODO: Define your action hook callback here
-	}
-
-	/**
-	 * NOTE:     Filters are points of execution in which WordPress modifies data
-	 *           before saving it or sending it to the browser.
-	 *
-	 *           Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function filter_method_name() {
-		// TODO: Define your filter hook callback here
 	}
 
 	/**
