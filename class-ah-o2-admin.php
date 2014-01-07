@@ -93,10 +93,28 @@ class AH_O2_Admin {
 		add_action( 'personal_options_update', array( $this, 'AH_O2_save_profile_fields' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'AH_O2_save_profile_fields' ) );
 
-		// Add the options page and menu item.
-		//add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
-
+		// hook into in_admin_header action to overwrite wp_screen object
+		add_action( 'in_admin_header', array( $this, 'modify_wp_screen' ) );
+		
 		$this->initialize_help_content();
+	}
+	
+	/**
+	 * Overwrite the WP_Screen object and also allow for modification of content.
+	 * 
+	 */
+	function modify_wp_screen(  ) {
+		global $current_screen;
+		$current_screen = new WP_Screen_Admin( $current_screen );
+		
+		// Modify Help Content
+		if ( $current_screen->id == 'plugins' ) {
+			$current_screen->add_help_tab( array(
+				'id'      => 'New Help',
+				'title'   => __('New Help'),
+				'content' => '<p>Random Help Text</p><p>More Content</p>',
+			) );
+		}
 	}
 
 	/**
