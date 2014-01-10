@@ -137,22 +137,8 @@ class AH_O2_Admin {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_styles() {
-
 		$screen = get_current_screen();
 		wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), AH_O2::VERSION );
-
-		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '0.1.0' );
-		if ( $this->show_tooltips ) {
-			if ( 'plugins' == $screen->id ) {
-				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
-				} else {
-					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
-				}
-				wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
-			}
-		}
-
 	}
 
 	/**
@@ -173,6 +159,17 @@ class AH_O2_Admin {
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), AH_O2::VERSION );
 		}
 
+		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), AH_O2::VERSION );
+		if ( $this->show_tooltips ) {
+			if ( 'plugins' == $screen->id ) {
+				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), AH_O2::VERSION );
+				} else {
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), AH_O2::VERSION );
+				}
+				wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
+			}
+		}
 	}
 
 	/**
