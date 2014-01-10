@@ -42,17 +42,17 @@ function AdminHelp( helpitem ) {
 			parent.items[ item.slug ] = item;
 
 			// setup help icon
-			for ( var selector in item.selector ) {
-				$( selector ).attr( 'data-slug', item.slug );
-				$( selector ).addClass( 'tip-adminhelp' );
+			for ( var i in item.selector ) {
+				$( item.selector[ i ] ).attr( 'data-slug', item.slug );
+				$( item.selector[ i ] ).addClass( 'tip-adminhelp' );
 			}
 		}
 
 		// if slug isn't defined assume the item is an array
 		// of help objects and add them one by one
 		if ( typeof item === 'object' && typeof item.slug !== 'string' ) {
-			for ( var i in item ) {
-				parent.add( item[ i ] );
+			for ( var j in item ) {
+				parent.add( item[ j ] );
 			}
 		}
 	};
