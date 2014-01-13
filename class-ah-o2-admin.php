@@ -93,10 +93,28 @@ class AH_O2_Admin {
 		add_action( 'personal_options_update', array( $this, 'AH_O2_save_profile_fields' ) );
 		add_action( 'edit_user_profile_update', array( $this, 'AH_O2_save_profile_fields' ) );
 
-		// Add the options page and menu item.
-		//add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
-
+		// hook into in_admin_header action to overwrite wp_screen object
+		add_action( 'in_admin_header', array( $this, 'modify_wp_screen' ) );
+		
 		$this->initialize_help_content();
+	}
+	
+	/**
+	 * Overwrite the WP_Screen object and also allow for modification of content.
+	 * 
+	 */
+	function modify_wp_screen(  ) {
+		global $current_screen;
+		$current_screen = new WP_Screen_Admin( $current_screen );
+		
+		// Modify Help Content
+		if ( $current_screen->id == 'plugins' ) {
+			$current_screen->add_help_tab( array(
+				'id'      => 'New Help',
+				'title'   => __('New Help'),
+				'content' => '<p>Random Help Text</p><p>More Content</p>',
+			) );
+		}
 	}
 
 	/**
@@ -137,8 +155,22 @@ class AH_O2_Admin {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_styles() {
+
 		$screen = get_current_screen();
 		wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), AH_O2::VERSION );
+
+		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '0.1.0' );
+		if ( $this->show_tooltips ) {
+			if ( 'plugins' == $screen->id ) {
+				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
+				} else {
+					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
+				}
+				wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
+			}
+		}
+
 	}
 
 	/**
@@ -159,17 +191,6 @@ class AH_O2_Admin {
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), AH_O2::VERSION );
 		}
 
-		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), AH_O2::VERSION );
-		if ( $this->show_tooltips ) {
-			if ( 'plugins' == $screen->id ) {
-				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), AH_O2::VERSION );
-				} else {
-					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), AH_O2::VERSION );
-				}
-				wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
-			}
-		}
 	}
 
 	/**

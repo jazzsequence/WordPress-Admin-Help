@@ -26,6 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+require_once( plugin_dir_path( __FILE__ ) . 'class-screen-admin.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'class-ah-o2.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'class-ah-o2-admin.php' );
 
