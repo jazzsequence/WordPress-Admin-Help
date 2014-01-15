@@ -95,18 +95,18 @@ class AH_O2_Admin {
 
 		// hook into in_admin_header action to overwrite wp_screen object
 		add_action( 'in_admin_header', array( $this, 'modify_wp_screen' ) );
-		
+
 		$this->initialize_help_content();
 	}
-	
+
 	/**
 	 * Overwrite the WP_Screen object and also allow for modification of content.
-	 * 
+	 *
 	 */
 	function modify_wp_screen(  ) {
 		global $current_screen;
 		$current_screen = new WP_Screen_Admin( $current_screen );
-		
+
 		// Modify Help Content
 		if ( $current_screen->id == 'plugins' ) {
 			$current_screen->add_help_tab( array(
