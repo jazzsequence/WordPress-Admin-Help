@@ -16,6 +16,16 @@ module.exports = function(grunt) {
 					'!*.min.js'
 				]
 			}
+		},
+
+		watch: {
+			scripts: {
+				files: [
+					'js/*.js',
+					'!js/*.min.js'
+				],
+				tasks: ['js']
+			}
 		}
 	});
 
@@ -23,6 +33,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-autoprefixer' );
 	grunt.loadNpmTasks( 'grunt-sass' );
+	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
 	grunt.registerTask( 'css', ['sass', 'autoprefixer', 'cssmin'] );
 	grunt.registerTask( 'js', ['uglify'] );

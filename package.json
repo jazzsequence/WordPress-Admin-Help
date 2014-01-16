@@ -17,6 +17,7 @@
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-autoprefixer": "~0.2.20130806",
     "grunt-contrib-jshint": "~0.6.2",
-    "grunt-sass": "~0.8.0"
+    "grunt-sass": "~0.8.0",
+    "grunt-contrib-watch": "~0.5.3"
   }
 }
