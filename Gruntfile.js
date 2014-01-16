@@ -16,29 +16,6 @@ module.exports = function(grunt) {
 					'!*.min.js'
 				]
 			}
-		},
-
-		autoprefixer: {
-			prefix: {
-				files: {
-
-				}
-			}
-		},
-
-		cssmin: {
-			minify: {
-				files: {
-
-				}
-			}
-		},
-
-		sass: {
-			dist: {
-				files: {
-				}
-			}
 		}
 	});
 
