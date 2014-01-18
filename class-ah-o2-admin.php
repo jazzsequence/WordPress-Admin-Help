@@ -106,15 +106,10 @@ class AH_O2_Admin {
 	function modify_wp_screen(  ) {
 		global $current_screen;
 		$current_screen = new WP_Screen_Admin( $current_screen );
-
-		// Modify Help Content
-		if ( $current_screen->id == 'plugins' ) {
-			$current_screen->add_help_tab( array(
-				'id'      => 'New Help',
-				'title'   => __('New Help'),
-				'content' => '<p>Random Help Text</p><p>More Content</p>',
-			) );
-		}
+		
+		//include Overview content for current page
+		//supress the error if file doesn't exist
+		@include( plugin_dir_path(__FILE__) . '/docs/' . $current_screen->id . '.php' );
 	}
 
 	/**
@@ -227,13 +222,11 @@ class AH_O2_Admin {
 							<input type="checkbox" id="help_tooltips" name="AH_O2_tooltips" value="1" <?php checked( $AH_O2_tooltips ); ?> />
 								<?php _e( 'Enable help tooltips.', 'ah-o2' ); ?><br />
 						</label>
-						<!--
-						 // Hiding this for now
+						
 						<label for="help_overview">
 							<input type="checkbox" id="help_overview" name="AH_O2_overview" value="1" <?php checked( $AH_O2_overview ); ?> />
-								<?php _e( 'Enable help overviews.', 'ah-o2' ); ?>
+								<?php _e( 'Auto Display help overviews.', 'ah-o2' ); ?>
 						</label>
-						-->
 					</td>
 		        </tr>
 	<?php }
