@@ -5,20 +5,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		concat: {
-			options: {
-				banner: 'jQuery(function( $ ) {',
-				footer: '});',
-				stripBanners: false,
-				// seperator: ';'
-			},
-			dist: {
-				files: {
-					'js/adminhelp-plugins.js': [ 'js/raw/help-test.js' ]
-				}
-			}
-		},
-
 		uglify: {
 			build: {
 				expand: true,
@@ -32,26 +18,13 @@ module.exports = function(grunt) {
 			}
 		},
 
-		autoprefixer: {
-			prefix: {
-				files: {
-
-				}
-			}
-		},
-
-		cssmin: {
-			minify: {
-				files: {
-
-				}
-			}
-		},
-
-		sass: {
-			dist: {
-				files: {
-				}
+		watch: {
+			scripts: {
+				files: [
+					'js/*.js',
+					'!js/*.min.js'
+				],
+				tasks: ['js']
 			}
 		}
 	});
@@ -60,9 +33,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-autoprefixer' );
 	grunt.loadNpmTasks( 'grunt-sass' );
-	grunt.loadNpmTasks( 'grunt-contrib-concat' );
+	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
 	grunt.registerTask( 'css', ['sass', 'autoprefixer', 'cssmin'] );
-	grunt.registerTask( 'js', ['concat', 'uglify'] );
-	grunt.registerTask( 'default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify'] );
+	grunt.registerTask( 'js', ['uglify'] );
+	grunt.registerTask( 'default', ['sass', 'autoprefixer', 'cssmin', 'uglify'] );
 };

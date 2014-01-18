@@ -3,7 +3,7 @@ Contributors: jazzs3quence, ninnypants, brainfork, mdbitz, trishasalas
 Tags: Admin Help, WordPress Help, WordPress 4.0, help
 Requires at least: 3.6
 Tested up to: 3.8
-Stable tag: 0.1
+Stable tag: 0.2
 
 Breathing new life into WordPress admin help. An experimental feature plugin intended for WordPress 4.0.
 
@@ -42,6 +42,11 @@ We'd love it if you could join our weekly meetings in #wordpress-sfd on Freenode
 Not yet.
 
 == Changelog ==
+
+= 0.2 =
+* Move script enqueueing into the actual enqueue_script function
+* Fix tooltip selectors
+* adds banners for WordPress.org
 
 = 0.1 =
 * Initial release on WordPress.org. Adds a tooltip on hover for the "Add New" button on the Plugins page
