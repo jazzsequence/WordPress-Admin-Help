@@ -615,16 +615,27 @@ class WP_Screen_Admin {
 
 	// Temporary CSS inline
 			?>
-		<style type="text/css">
-#screen-meta {
-	display: block; !important
+<style type="text/css">
+#screen-meta-container {
+	-moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #FFFFFF;
+    border-color: -moz-use-text-color #DDDDDD #DDDDDD;
+    border-image: none;
+    border-right: 1px solid #DDDDDD;
+    border-width: 0 1px 1px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.024);
+    margin: 0 20px -1px 0;
+    position: relative;
 }
 		
-#screen-meta-block-links {
+#screen-meta-menu-links {
 	margin: 0 20px 0 0;
 }
 
-#screen-meta-block-links a {
+#screen-meta-menu-links a {
 	padding: 3px 6px 3px 16px;
 	display: block;
     font-size: 13px;
@@ -633,7 +644,7 @@ class WP_Screen_Admin {
     text-decoration: none;
 }
 
-.screen-meta-link-wrap {
+.screen-meta-menu-wrap {
 	float: right;
     height: 28px;
     margin: 0 0 0 6px;
@@ -654,14 +665,14 @@ class WP_Screen_Admin {
 .contextual-help-tabs {
     float: right;
     margin: 0;
-    width: 12em;
+    width: 25%;
 }
 
-.contextual-help-tabs-wrap {
-    float: right;
+.contextual-help-tabs-content {
+    float: left;
     overflow: auto;
-    padding: 0 20px 0px 0px;
-    width: 50em;
+    margin: 0 10px 0px 10px;
+    width: 70%;
 }
 
 #screen-options-wrap, #contextual-help-wrap {
@@ -678,21 +689,12 @@ class WP_Screen_Admin {
 }
 
 .help-tab-content-icon {
-	padding: 10px 10px 0px 0px;
-	font-size: 6em;
-	display: inline-block;
-	float: left;
+	padding: 0px 10px 0px 0px;
+	font-size: 1.5em;
 	color: #0074A2;
-	width: 1em;
 }
 
-.help-tab-content-body {
-	display: inline-block; 
-	float: left;
-	width: 35em
-}
-
-		</style>
+</style>
 		<?php
 	
 		// Call old contextual_help_list filter.
@@ -715,11 +717,11 @@ class WP_Screen_Admin {
 				'content' => $old_help,
 			) );
 		}
-
+		
 		// hide help by default based on user setting
 		$user = wp_get_current_user();
-		$admin_help_overview = $user->has_prop( 'admin_help_overview' ) ? $user->get( 'admin_help_overview' ) : true;
-		if( $admin_help_overview === false ) {
+		$admin_help_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : false;
+		if( false == $admin_help_overview ) {
 			$help_class = 'hidden';
 		}
 		
@@ -729,20 +731,20 @@ class WP_Screen_Admin {
 		}
 
 		?>
-		<div id="screen-meta-block-links">
+		<div id="screen-meta-menu-links">
 		<?php if ( $this->show_screen_options() ) : ?>
-			<div class="hide-if-no-js screen-meta-link-wrap screen-meta-toggle">
-			<a href="#screen-options-wrap" id="show-settings-link" class="show-settings" aria-controls="screen-options-wrap" aria-expanded="false"><div class="screen-meta-icon dashicons dashicons-admin-generic"></div> <?php _e( 'screen options' ); ?></a>
+			<div class="hide-if-no-js screen-meta-menu-wrap screen-meta-content-toggle">
+			<a href="#screen_meta_container" id="show-settings-link" class="show-settings" aria-controls="screen-options-wrap" aria-expanded="false"><div class="screen-meta-icon dashicons dashicons-admin-generic"></div> <?php _e( 'screen options' ); ?></a>
 			</div>
 		<?php endif; ?>
 		<?php if ( $this->get_help_tabs() ) : ?>
-			<div class="hide-if-no-js screen-meta-link-wrap screen-meta-toggle">
-			<a href="#contextual-help-wrap" id="contextual-help-link" class="icon-adminhelp show-settings" aria-controls="contextual-help-wrap" aria-expanded="false" ><div class="screen-meta-icon dashicons dashicons-info"></div><?php _e( 'help' ); ?></a>
+			<div class="hide-if-no-js screen-meta-menu-wrap screen-meta-content-toggle">
+			<a href="#screen_meta_container" id="contextual-help-link" class="icon-adminhelp show-settings" aria-controls="contextual-help-wrap" aria-expanded="false" ><div class="screen-meta-icon dashicons dashicons-info"></div><?php _e( 'help' ); ?></a>
 			</div>
 			<div style="clear:both;" ><!-- --></div>
 		<?php endif; ?>
 		</div>
-		<div id="screen-meta">
+		<div id="screen-meta-container">
 			<div id="contextual-help-wrap" class="screen-meta-block-overview <?php echo esc_attr( $help_class ); ?>" tabindex="-1" aria-label="<?php esc_attr_e('Contextual Help Tab'); ?>">
 				<div id="contextual-help-columns">
 				
@@ -778,7 +780,7 @@ class WP_Screen_Admin {
 						</ul>
 					</div>
 
-					<div class="contextual-help-tabs-wrap">
+					<div class="contextual-help-tabs-content">
 						<?php
 						$classes = 'help-tab-content active';
 						foreach ( $this->get_help_tabs() as $tab ):
@@ -786,8 +788,9 @@ class WP_Screen_Admin {
 							?>
 
 							<div id="<?php echo esc_attr( $panel_id ); ?>" class="<?php echo $classes; ?>">
-								<div class="help-tab-content-icon dashicons dashicons-info"></div><div class="help-tab-content-body">
-								<h3><?php
+								<div class="help-tab-content-body">
+								
+								<h3><div class="help-tab-content-icon dashicons dashicons-info"></div><?php
 								echo $tab['title'];
 								?>
 								</h3>
@@ -809,8 +812,8 @@ class WP_Screen_Admin {
 							$panel_id = "tab-panel-sidebar";
 						?>
 							<div id="<?php echo esc_attr( $panel_id ); ?>" class="<?php echo $classes; ?>">
-								<div class="help-tab-content-icon dashicons dashicons-info"></div><div class="help-tab-content-body">
-								<h3>Additional Support
+								<div class="help-tab-content-body">
+								<h3><div class="help-tab-content-icon dashicons dashicons-info"></div>Additional Support
 								</h3>
 								<?php
 								// Print tab content.
@@ -829,7 +832,6 @@ class WP_Screen_Admin {
 					
 				</div>
 			</div>
-		</div>
 		<?php
 		// Setup layout columns
 
@@ -848,8 +850,26 @@ class WP_Screen_Admin {
 		$GLOBALS[ 'screen_layout_columns' ] = $this->columns; // Set the global for back-compat.
 
 		// Add screen options
-		if ( $this->show_screen_options() )
+		if ( $this->show_screen_options() ) {
 			$this->render_screen_options();
+		}
+		
+		?></div>
+		
+		<script type="text/javascript">
+			jQuery( ".show-settings" ).click( function() {
+				var show_meta_id = jQuery(this).attr('aria-controls');
+				if( jQuery( "#" + show_meta_id ).hasClass('hidden') ) {
+					jQuery( ".screen-meta-block-overview").addClass('hidden');
+					jQuery( "#" + show_meta_id ).removeClass('hidden');
+				} else {
+					jQuery( ".screen-meta-block-overview").addClass('hidden');
+				}
+			});
+		</script>
+		
+		<?php
+		
 	}
 
 	public function show_screen_options() {
@@ -893,7 +913,7 @@ class WP_Screen_Admin {
 		$post    = get_post();
 
 		?>
-		<div id="screen-options-wrap" class="hidden" tabindex="-1" aria-label="<?php esc_attr_e('Screen Options Tab'); ?>">
+		<div id="screen-options-wrap" class="screen-meta-block-overview hidden" tabindex="-1" aria-label="<?php esc_attr_e('Screen Options Tab'); ?>">
 		<form id="adv-settings" action="" method="post">
 		<?php if ( isset( $wp_meta_boxes[ $this->id ] ) || $this->get_option( 'per_page' ) || ( $columns && empty( $columns['_title'] ) ) ) : ?>
 			<h5><?php _e( 'Show on screen' ); ?></h5>

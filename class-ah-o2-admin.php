@@ -227,13 +227,11 @@ class AH_O2_Admin {
 							<input type="checkbox" id="help_tooltips" name="AH_O2_tooltips" value="1" <?php checked( $AH_O2_tooltips ); ?> />
 								<?php _e( 'Enable help tooltips.', 'ah-o2' ); ?><br />
 						</label>
-						<!--
-						 // Hiding this for now
+						
 						<label for="help_overview">
 							<input type="checkbox" id="help_overview" name="AH_O2_overview" value="1" <?php checked( $AH_O2_overview ); ?> />
-								<?php _e( 'Enable help overviews.', 'ah-o2' ); ?>
+								<?php _e( 'Auto Display help overviews.', 'ah-o2' ); ?>
 						</label>
-						-->
 					</td>
 		        </tr>
 	<?php }
