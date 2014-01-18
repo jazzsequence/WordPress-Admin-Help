@@ -106,15 +106,10 @@ class AH_O2_Admin {
 	function modify_wp_screen(  ) {
 		global $current_screen;
 		$current_screen = new WP_Screen_Admin( $current_screen );
-
-		// Modify Help Content
-		if ( $current_screen->id == 'plugins' ) {
-			$current_screen->add_help_tab( array(
-				'id'      => 'New Help',
-				'title'   => __('New Help'),
-				'content' => '<p>Random Help Text</p><p>More Content</p>',
-			) );
-		}
+		
+		//include Overview content for current page
+		//supress the error if file doesn't exist
+		@include( plugin_dir_path(__FILE__) . '/docs/' . $current_screen->id . '.php' );
 	}
 
 	/**
