@@ -1,9 +1,9 @@
 === AH-O&#8322; ===
-Contributors: jazzs3quence, ninnypants, brainfork, mdbitz, trishasalas
+Contributors: jazzs3quence, ninnypants, brainfork, mdbitz, trishasalas, ubernaut
 Tags: Admin Help, WordPress Help, WordPress 4.0, help
 Requires at least: 3.6
-Tested up to: 3.8
-Stable tag: 0.2
+Tested up to: 3.8.1
+Stable tag: 0.3
 
 Breathing new life into WordPress admin help. An experimental feature plugin intended for WordPress 4.0.
 
@@ -42,6 +42,15 @@ We'd love it if you could join our weekly meetings in #wordpress-sfd on Freenode
 Not yet.
 
 == Changelog ==
+
+= 0.3 =
+* updated banners
+* fixes help overview styling
+* allows overviews to be controlled by the profile setting
+* Remove concat action and setup all tooltip content in the adminhelp-{page}.js file
+* Remove unused actions
+* new tooltips added to Posts page
+* separated tooltip content into individual files by slug
 
 = 0.2 =
 * Move script enqueueing into the actual enqueue_script function
