@@ -96,7 +96,7 @@ class AH_O2_Admin {
 		// hook into in_admin_header action to overwrite wp_screen object
 		add_action( 'in_admin_header', array( $this, 'modify_wp_screen' ) );
 
-		$this->initialize_help_content();
+		
 	}
 
 	/**
@@ -139,7 +139,7 @@ class AH_O2_Admin {
 		$user = wp_get_current_user();
 		$this->show_tooltips = $user->has_prop( 'AH_O2_tooltips' ) ? $user->get( 'AH_O2_tooltips' ) : true;
 		$this->show_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : true;
-
+		
 	}
 
 	/**
@@ -150,19 +150,20 @@ class AH_O2_Admin {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_styles() {
-
+		
 		$screen = get_current_screen();
 		wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), AH_O2::VERSION );
-
 		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '0.1.0' );
 		if ( $this->show_tooltips ) {
-			if ( 'plugins' == $screen->id ) {
+			$this->initialize_help_content();
+			$js_path = '/js/adminhelp-' . $screen->id . '.js';
+			if( file_exists( plugin_dir_path(__FILE__) . $js_path ) ) {
 				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
+					wp_enqueue_script( 'adminhelp-' . $screen->id, plugins_url( $js_path, __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
 				} else {
-					wp_enqueue_script( 'adminhelp-plugins', plugins_url( '/js/adminhelp-plugins.min.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
+					wp_enqueue_script( 'adminhelp-' . $screen->id, plugins_url( $js_path, __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.1.0' );
 				}
-				wp_localize_script( 'adminhelp-plugins', 'adminhelp_content', $this->localize_page_plugins( array( 'addplugin' ) ) );
+				wp_localize_script( 'adminhelp-' . $screen->id, 'adminhelp_content', $this->localize_page_plugins( array_keys( $this->tooltip_help_content ) ) );
 			}
 		}
 
@@ -262,7 +263,10 @@ class AH_O2_Admin {
 	 * @return void
 	 */
 	protected function initialize_help_content() {
-		$this->tooltip_help_content['addplugin'] = '<p>' . __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut nibh et libero feugiat rhoncus at id arcu. Etiam mollis turpis sed elit tincidunt posuere. Fusce nibh velit, luctus pretium dolor et, suscipit facilisis quam. Morbi id pretium lectus. Maecenas mollis quam eget blandit bibendum. Nam in posuere sem. Nullam pretium ante sit amet mi imperdiet, a placerat nisi vestibulum. Ut vel sodales libero. Nam dictum mollis felis condimentum auctor. Sed eleifend dolor urna, vitae aliquet quam accumsan in. Suspendisse feugiat, diam non gravida gravida, nisl justo suscipit nisi, id imperdiet ante tellus in velit. Fusce hendrerit porttitor sollicitudin. Sed eget lectus id elit condimentum varius.', 'ah-o2' ) . '</p>';
+		global $current_screen;
+		//include tooltip content for current page
+		//supress the error if file doesn't exist
+		@include( plugin_dir_path(__FILE__) . '/docs/' . $current_screen->id . '-tips.php' );
 	}
 
 	protected function localize_page_plugins( $parts = array() ) {
