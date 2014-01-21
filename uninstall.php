@@ -2,7 +2,7 @@
 /**
  * Fired when the plugin is uninstalled.
  *
- * @package   Admin_Help
+ * @package   AH_O2
  * @author    Chris Reynolds <me@chrisreynolds.io>
  * @license   GPLv3
  * @link      http://make.wordpress.org/docs/tag/admin-help/

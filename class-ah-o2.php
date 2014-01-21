@@ -2,7 +2,7 @@
 /**
  * Plugin Name.
  *
- * @package   Admin_Help
+ * @package   AH_O2
  * @author    Chris Reynolds <me@chrisreynolds.io>
  * @license   GPLv3
  * @link      http://make.wordpress.org/docs/tag/admin-help/
@@ -14,21 +14,21 @@
  * public-facing side of the WordPress site.
  *
  * If you're interested in introducing administrative or dashboard
- * functionality, then refer to `class-admin-help-admin.php`
+ * functionality, then refer to `class-ah-o2-admin.php`
  *
- * @package Admin_Help
+ * @package AH_O2
  * @author  Chris Reynolds <me@chrisreynolds.io>
  */
-class Admin_Help {
+class AH_O2 {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 *
-	 * @since   1.0.0
+	 * @since   0.1.0
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.0';
+	const VERSION = '0.2.0';
 
 	/**
 	 *
@@ -39,16 +39,16 @@ class Admin_Help {
 	 * of text. Its value should match the Text Domain file header in the main
 	 * plugin file.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 * @var      string
 	 */
-	protected $plugin_slug = 'admin-help';
+	protected $plugin_slug = 'ah-o2';
 
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 * @var      object
 	 */
@@ -58,7 +58,7 @@ class Admin_Help {
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
 	 *
-	 * @since     1.0.0
+	 * @since     0.1.0
 	 */
 	private function __construct() {
 
@@ -83,7 +83,7 @@ class Admin_Help {
 	/**
 	 * Return the plugin slug.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 *@return    Plugin slug variable.
 	 */
@@ -94,7 +94,7 @@ class Admin_Help {
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     1.0.0
+	 * @since     0.1.0
 	 *
 	 * @return    object    A single instance of this class.
 	 */
@@ -111,7 +111,7 @@ class Admin_Help {
 	/**
 	 * Fired when the plugin is activated.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses
 	 *                                       "Network Activate" action, false if
@@ -148,7 +148,7 @@ class Admin_Help {
 	/**
 	 * Fired when the plugin is deactivated.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses
 	 *                                       "Network Deactivate" action, false if
@@ -186,7 +186,7 @@ class Admin_Help {
 	/**
 	 * Fired when a new site is activated with a WPMU environment.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 * @param    int    $blog_id    ID of the new blog.
 	 */
@@ -208,7 +208,7 @@ class Admin_Help {
 	 * - not spam
 	 * - not deleted
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 *
 	 * @return   array|false    The blog ids, false if no matches.
 	 */
@@ -228,7 +228,7 @@ class Admin_Help {
 	/**
 	 * Fired for each blog when the plugin is activated.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 */
 	private static function single_activate() {
 		// TODO: Define activation functionality here
@@ -237,7 +237,7 @@ class Admin_Help {
 	/**
 	 * Fired for each blog when the plugin is deactivated.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 */
 	private static function single_deactivate() {
 		// TODO: Define deactivation functionality here
@@ -246,7 +246,7 @@ class Admin_Help {
 	/**
 	 * Load the plugin text domain for translation.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 */
 	public function load_plugin_textdomain() {
 
@@ -261,7 +261,7 @@ class Admin_Help {
 	/**
 	 * Register and enqueue public-facing style sheet.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'css/public.css', __FILE__ ), array(), self::VERSION );
@@ -270,7 +270,7 @@ class Admin_Help {
 	/**
 	 * Register and enqueues public-facing JavaScript files.
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
@@ -283,7 +283,7 @@ class Admin_Help {
 	 *        Actions:    http://codex.wordpress.org/Plugin_API#Actions
 	 *        Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 */
 	public function action_method_name() {
 		// TODO: Define your action hook callback here
@@ -296,7 +296,7 @@ class Admin_Help {
 	 *        Filters: http://codex.wordpress.org/Plugin_API#Filters
 	 *        Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
 	 *
-	 * @since    1.0.0
+	 * @since    0.1.0
 	 */
 	public function filter_method_name() {
 		// TODO: Define your filter hook callback here
