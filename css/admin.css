@@ -1,4 +1,16 @@
-/* This stylesheet is used to style the admin option form of the plugin. */
 .ui-tooltip {
+	background-color: #f7f7f7;
 	width: 35%;
+	padding:1em;
+	border-top: 1px solid #e1e1e1;
+	border-right: 1px solid #e1e1e1;
+	border-bottom: 1px solid #e1e1e1;
+	border-left: 3px solid #2ea2cc;
+	-webkit-box-shadow: 1px 1px 10px rgba(0,0,0,.04);
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.ui-tooltip p {
+	color: #2ea2cc;
+	font-size: 1.2em;
 }
