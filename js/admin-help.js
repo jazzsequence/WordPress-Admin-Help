@@ -21,6 +21,16 @@ function AdminHelp( helpitem ) {
 				} else {
 					return '';
 				}
+			},
+			 position: {
+				using: function( position, feedback ) {
+				$( this ).css( position );
+				$( "<div>" )
+					.addClass( "arrow" )
+					.addClass( feedback.vertical )
+					.addClass( feedback.horizontal )
+					.appendTo( this );
+				}
 			}
 		});
 	};
