@@ -95,8 +95,6 @@ class AH_O2_Admin {
 
 		// hook into in_admin_header action to overwrite wp_screen object
 		add_action( 'in_admin_header', array( $this, 'modify_wp_screen' ) );
-
-
 	}
 
 	/**
@@ -139,7 +137,6 @@ class AH_O2_Admin {
 		$user = wp_get_current_user();
 		$this->show_tooltips = $user->has_prop( 'AH_O2_tooltips' ) ? $user->get( 'AH_O2_tooltips' ) : true;
 		$this->show_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : true;
-
 	}
 
 	/**
@@ -177,13 +174,12 @@ class AH_O2_Admin {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_scripts() {
-
+	
 		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
 		}
 
 		wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), AH_O2::VERSION );
-
 	}
 
 	/**
