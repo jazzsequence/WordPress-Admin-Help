@@ -96,7 +96,7 @@ class AH_O2_Admin {
 		// hook into in_admin_header action to overwrite wp_screen object
 		add_action( 'in_admin_header', array( $this, 'modify_wp_screen' ) );
 
-		
+
 	}
 
 	/**
@@ -106,7 +106,7 @@ class AH_O2_Admin {
 	function modify_wp_screen(  ) {
 		global $current_screen;
 		$current_screen = new WP_Screen_Admin( $current_screen );
-		
+
 		//include Overview content for current page
 		//supress the error if file doesn't exist
 		@include( plugin_dir_path(__FILE__) . '/docs/' . $current_screen->id . '.php' );
@@ -139,7 +139,7 @@ class AH_O2_Admin {
 		$user = wp_get_current_user();
 		$this->show_tooltips = $user->has_prop( 'AH_O2_tooltips' ) ? $user->get( 'AH_O2_tooltips' ) : true;
 		$this->show_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : true;
-		
+
 	}
 
 	/**
@@ -150,7 +150,7 @@ class AH_O2_Admin {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_styles() {
-		
+
 		$screen = get_current_screen();
 		wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'css/admin.css', __FILE__ ), array(), AH_O2::VERSION );
 		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '0.1.0' );
@@ -182,10 +182,7 @@ class AH_O2_Admin {
 			return;
 		}
 
-		$screen = get_current_screen();
-		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), AH_O2::VERSION );
-		}
+		wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), AH_O2::VERSION );
 
 	}
 
@@ -223,7 +220,7 @@ class AH_O2_Admin {
 							<input type="checkbox" id="help_tooltips" name="AH_O2_tooltips" value="1" <?php checked( $AH_O2_tooltips ); ?> />
 								<?php _e( 'Enable help tooltips.', 'ah-o2' ); ?><br />
 						</label>
-						
+
 						<label for="help_overview">
 							<input type="checkbox" id="help_overview" name="AH_O2_overview" value="1" <?php checked( $AH_O2_overview ); ?> />
 								<?php _e( 'Auto Display help overviews.', 'ah-o2' ); ?>
