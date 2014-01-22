@@ -612,90 +612,6 @@ class WP_Screen_Admin {
 	 * @since 3.3.0
 	 */
 	public function render_screen_meta() {
-
-	// Temporary CSS inline
-			?>
-<style type="text/css">
-#screen-meta-container {
-	-moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background-color: #FFFFFF;
-    border-color: -moz-use-text-color #DDDDDD #DDDDDD;
-    border-image: none;
-    border-right: 1px solid #DDDDDD;
-    border-width: 0 1px 1px;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.024);
-    margin: 0 20px -1px 0;
-    position: relative;
-}
-		
-#screen-meta-menu-links {
-	margin: 0 20px 0 0;
-}
-
-#screen-meta-menu-links a {
-	padding: 3px 6px 3px 16px;
-	display: block;
-    font-size: 13px;
-    height: 22px;
-    line-height: 22px;
-    text-decoration: none;
-}
-
-.screen-meta-menu-wrap {
-	float: right;
-    height: 28px;
-    margin: 0 0 0 6px;
-}
-
-.screen-meta-block-overview {
-	background: none repeat scroll 0 0 #FFFFFF;
-	border: 1px solid #E5E5E5;
-	margin: 0 20px 0 0;
-	border-left: 4px solid #2EA2CC;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
-}
-
-.screen-meta-icon {
-	padding: 3px 0;
-}
-
-.contextual-help-tabs {
-    float: right;
-    margin: 0;
-    width: 25%;
-}
-
-.contextual-help-tabs-content {
-    float: left;
-    overflow: auto;
-    margin: 0 10px 0px 10px;
-    width: 70%;
-}
-
-#screen-options-wrap, #contextual-help-wrap {
-    position: relative;
-	overflow-x: hidden;
-}
-
-.contextual-help-tabs ul {
-    margin: 0 0;
-}
-
-.help-tab-content h3 {
-	color: #0074A2;
-}
-
-.help-tab-content-icon {
-	padding: 0px 10px 0px 0px;
-	font-size: 1.5em;
-	color: #0074A2;
-}
-
-</style>
-		<?php
 	
 		// Call old contextual_help_list filter.
 		self::$_old_compat_help = apply_filters( 'contextual_help_list', self::$_old_compat_help, $this );
@@ -854,21 +770,7 @@ class WP_Screen_Admin {
 			$this->render_screen_options();
 		}
 		
-		?></div>
-		
-		<script type="text/javascript">
-			jQuery( ".show-settings" ).click( function() {
-				var show_meta_id = jQuery(this).attr('aria-controls');
-				if( jQuery( "#" + show_meta_id ).hasClass('hidden') ) {
-					jQuery( ".screen-meta-block-overview").addClass('hidden');
-					jQuery( "#" + show_meta_id ).removeClass('hidden');
-				} else {
-					jQuery( ".screen-meta-block-overview").addClass('hidden');
-				}
-			});
-		</script>
-		
-		<?php
+		?></div><?php
 		
 	}
 

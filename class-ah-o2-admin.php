@@ -177,15 +177,12 @@ class AH_O2_Admin {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_scripts() {
-
+	
 		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
 		}
 
-		$screen = get_current_screen();
-		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), AH_O2::VERSION );
-		}
+		wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ), AH_O2::VERSION );
 
 	}
 
