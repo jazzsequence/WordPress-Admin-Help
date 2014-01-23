@@ -7,6 +7,8 @@ Breathing new life into help in the WordPress admin.
 
 A feature plugin intended for WordPress 4.0
 
+[Git Chat](https://gitter.im/jazzsequence/WordPress-Admin-Help)
+
 ###Screenshots
 
 ####This is what we have (so far):
