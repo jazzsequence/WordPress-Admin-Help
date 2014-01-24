@@ -746,6 +746,15 @@ class WP_Screen_Admin {
 						?>
 					</div>
 					
+					<div class="help-footer">
+						<div class="help-footer-menu">
+							<a href="#screen_meta_container" id="contextual-help-hide-link" class="icon-adminhelp show-settings" aria-controls="contextual-help-wrap" aria-expanded="false" ><div class="screen-meta-footer-icon dashicons dashicons-visibility"></div><?php _e( 'hide help' ); ?></a>
+						</div>
+						<div class="help-footer-menu">
+							<a href="<?php echo admin_url( "profile.php#Admin-Help" ); ?>" id="configure-help-link" class="icon-adminhelp" aria-expanded="false" ><div class="screen-meta-footer-icon dashicons dashicons-admin-generic"></div><?php _e( 'configure help' ); ?></a>
+						</div>
+					</div>
+					
 				</div>
 			</div>
 		<?php

@@ -209,7 +209,7 @@ class AH_O2_Admin {
 		$AH_O2_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : true;
 
 	?>
-		        <tr>
+		        <tr id="Admin-Help">
 					<th><label for="show_tooltips"><?php _e( 'Help Settings', 'ah-o2' ); ?></label></th>
 					<td>
 						<label for="help_tooltips">

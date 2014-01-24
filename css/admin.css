@@ -106,19 +106,6 @@
 	padding: 3px 0;
 }
 
-.contextual-help-tabs {
-    float: right;
-    margin: 0;
-    width: 25%;
-}
-
-.contextual-help-tabs-content {
-    float: left;
-    overflow: auto;
-    margin: 0 10px 0px 10px;
-    width: 70%;
-}
-
 #screen-options-wrap, #contextual-help-wrap {
     position: relative;
 	overflow-x: hidden;
@@ -137,3 +124,62 @@
 	font-size: 1.5em;
 	color: #0074A2;
 }
+
+@media screen and (max-width: 782px) {
+	.contextual-help-tabs {
+		margin: 0;
+		width: 100%;
+		float: none;
+		border-bottom: 1px solid #E1E1E1;
+	}
+
+	.contextual-help-tabs-content {
+		overflow: auto;
+		width: 100%;
+		margin: 0 10px 0px 10px;
+	}
+	
+	.help-footer-menu {
+		float: right;
+		margin: 0px 10px 0px 0px;
+	}
+
+}
+
+@media screen and (min-width: 783px) {
+	.contextual-help-tabs {
+		float: right;
+		margin: 0;
+		width: 25%;
+	}
+
+	.contextual-help-tabs-content {
+		float: left;
+		overflow: auto;
+		margin: 0 10px 0px 10px;
+		width: 70%;
+	}
+	
+	.help-footer {
+		clear: both;
+		width: 70%;
+		text-align: right;
+	}
+	
+
+	.help-footer-menu {
+		float: right;
+		margin: 0px 0px 0px 10px;
+	}
+	
+}
+
+.help-footer-menu a {
+	text-decoration: none;
+}
+
+.screen-meta-footer-icon {
+	padding: 2px 0;
+}
+
+
