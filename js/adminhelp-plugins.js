@@ -10,91 +10,91 @@ jQuery(function( $ ) {
 		{
 			slug: 'namecolumn',
 			selector: [
-				'.column-name'
+				'.manage-column.column-name'
 			],
 			content: adminhelp_content.namecolumn
 		},
 		{
 			slug: 'descriptioncolumn',
 			selector: [
-				'.column-description'
+				'.manage-column.column-description'
 			],
 			content: adminhelp_content.descriptioncolumn
 		},
 		{
 			slug: 'activatebutton',
 			selector: [
-				'.activate'
+				'span.activate'
 			],
 			content: adminhelp_content.activatebutton
 		},
 		{
 			slug: 'deactivatebutton',
 			selector: [
-				'.deactivate'
+				'span.deactivate'
 			],
 			content: adminhelp_content.deactivatebutton
 		},
 		{
 			slug: 'editbutton',
 			selector: [
-				'.edit'
+				'span.edit'
 			],
 			content: adminhelp_content.editbutton
 		},
 		{
 			slug: 'settingsbutton',
 			selector: [
-				'.settings'
+				'span.settings'
 			],
 			content: adminhelp_content.settingsbutton
 		},
 		{
 			slug: 'deletebutton',
 			selector: [
-				'.delete'
+				'span.delete'
 			],
 			content: adminhelp_content.deletebutton
 		},
 		{
 			slug: 'alltab',
 			selector: [
-				'.all'
+				'.subsubsub .all'
 			],
 			content: adminhelp_content.alltab
 		},
 		{
 			slug: 'activetab',
 			selector: [
-				'.active'
+				'.subsubsub .active'
 			],
 			content: adminhelp_content.activetab
 		},
 		{
 			slug: 'inactivetab',
 			selector: [
-				'.inactive'
+				'.subsubsub .inactive'
 			],
 			content: adminhelp_content.inactivetab
 		},
 		{
 			slug: 'updatetab',
 			selector: [
-				'.update'
+				'.subsubsub .update'
 			],
 			content: adminhelp_content.updatetab
 		},
 		{
 			slug: 'mustusetab',
 			selector: [
-				'.mustuse'
+				'.subsubsub .mustuse'
 			],
 			content: adminhelp_content.mustusetab
 		},
 		{
 			slug: 'dropinstab',
 			selector: [
-				'.dropins'
+				'.subsubsub .dropins'
 			],
 			content: adminhelp_content.dropinstab
 		}
