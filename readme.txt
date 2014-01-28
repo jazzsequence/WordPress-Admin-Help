@@ -3,7 +3,7 @@ Contributors: jazzs3quence, ninnypants, brainfork, mdbitz, trishasalas, ubernaut
 Tags: Admin Help, WordPress Help, WordPress 4.0, help
 Requires at least: 3.6
 Tested up to: 3.8.1
-Stable tag: 0.3
+Stable tag: 0.4.0
 
 Breathing new life into WordPress admin help. An experimental feature plugin intended for WordPress 4.0.
 
@@ -42,6 +42,13 @@ We'd love it if you could join our weekly meetings in #wordpress-sfd on Freenode
 Not yet.
 
 == Changelog ==
+
+= 0.4 =
+* new styling and javascript for tooltips
+* help overview css and js added to general admin.css and admin.js files
+* responsive styling of overviews
+* help footer added to overviews (hide/configure)
+* tooltips added to plugins pages
 
 = 0.3 =
 * updated banners
