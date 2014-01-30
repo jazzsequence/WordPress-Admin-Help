@@ -8,6 +8,13 @@ jQuery(function( $ ) {
 	 */
 	adminHelp.add([
 		{
+			slug: 'addplugin',
+			selector: [
+				'.plugins-php .add-new-h2'
+			],
+			content: adminhelp_content.addplugin
+		},
+		{
 			slug: 'namecolumn',
 			selector: [
 				'.manage-column.column-name'
@@ -57,11 +64,11 @@ jQuery(function( $ ) {
 			content: adminhelp_content.deletebutton
 		},
 		{
-			slug: 'alltab',
+			slug: 'pluginsalltab',
 			selector: [
-				'.subsubsub .all'
+				'.plugins-php .subsubsub .all'
 			],
-			content: adminhelp_content.alltab
+			content: adminhelp_content.pluginsalltab
 		},
 		{
 			slug: 'activetab',
