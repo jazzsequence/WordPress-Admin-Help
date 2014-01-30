@@ -19,84 +19,41 @@ jQuery(function( $ ) {
 			selector: [
 				'.users-php .add-new-h2'
 			],
-			content: adminhelp_content.usersaddnew
 		},
 		{
-			slug: 'descriptioncolumn',
+			slug: 'administratortab',
 			selector: [
-				'.manage-column.column-description'
+				'.users-php .subsubsub .administrator'
 			],
-			content: adminhelp_content.descriptioncolumn
+			content: adminhelp_content.administratortab
 		},
 		{
-			slug: 'activatebutton',
+			slug: 'editortab',
 			selector: [
-				'span.activate'
+				'.users-php .subsubsub .editor'
 			],
-			content: adminhelp_content.activatebutton
+			content: adminhelp_content.editortab
 		},
 		{
-			slug: 'deactivatebutton',
+			slug: 'authortab',
 			selector: [
-				'span.deactivate'
+				'.users-php .subsubsub .author'
 			],
-			content: adminhelp_content.deactivatebutton
+			content: adminhelp_content.authortab
 		},
 		{
-			slug: 'editbutton',
+			slug: 'contributortab',
 			selector: [
-				'span.edit'
+				'.users-php .subsubsub .contributor'
 			],
-			content: adminhelp_content.editbutton
+			content: adminhelp_content.contributortab
 		},
 		{
-			slug: 'settingsbutton',
+			slug: 'subscribertab',
 			selector: [
-				'span.settings'
+				'.users-php .subsubsub .subscriber'
 			],
-			content: adminhelp_content.settingsbutton
+			content: adminhelp_content.subscribertab
 		},
-		{
-			slug: 'deletebutton',
-			selector: [
-				'span.delete'
-			],
-			content: adminhelp_content.deletebutton
-		},
-		{
-			slug: 'activetab',
-			selector: [
-				'.subsubsub .active'
-			],
-			content: adminhelp_content.activetab
-		},
-		{
-			slug: 'inactivetab',
-			selector: [
-				'.subsubsub .inactive'
-			],
-			content: adminhelp_content.inactivetab
-		},
-		{
-			slug: 'updatetab',
-			selector: [
-				'.subsubsub .update'
-			],
-			content: adminhelp_content.updatetab
-		},
-		{
-			slug: 'mustusetab',
-			selector: [
-				'.subsubsub .mustuse'
-			],
-			content: adminhelp_content.mustusetab
-		},
-		{
-			slug: 'dropinstab',
-			selector: [
-				'.subsubsub .dropins'
-			],
-			content: adminhelp_content.dropinstab
-		}
 	]);
 });

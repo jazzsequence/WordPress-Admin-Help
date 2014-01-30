@@ -2,15 +2,8 @@
 
 $this->tooltip_help_content['usersalltab'] = '<p>' . __( 'Displays all the users registered on your site.', 'ah-o2' ) . '</p>';
 $this->tooltip_help_content['usersaddnew'] = '<p>' . __( 'Add a new user to your site.', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['descriptioncolumn'] = '<p>' . __( 'Descriptions of currently available plugins', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['activatebutton'] = '<p>' . __( 'Activate this plugin', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['deactivatebutton'] = '<p>' . __( 'Deactivate this plugin', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['editbutton'] = '<p>' . __( 'Open this plugin in the Plugin Editor', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['settingsbutton'] = '<p>' . __( 'Configure the settings of this plugin', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['deletebutton'] = '<p>' . __( 'Delete this plugin', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['alltab'] = '<p>' . __( 'View all available plugins', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['activetab'] = '<p>' . __( 'View all active plugins', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['inactivetab'] = '<p>' . __( 'View all inactive plugins', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['updatetab'] = '<p>' . __( 'View all plugins with available updates', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['mustusetab'] = '<p>' . __( 'View all must use plugins', 'ah-o2' ) . '</p>';
-$this->tooltip_help_content['dropinstab'] = '<p>' . __( 'View drop in plugins', 'ah-o2' ) . '</p>';
+$this->tooltip_help_content['administratortab'] = '<p>' . __( 'Filter users to display only users with administrator access.', 'ah-o2' ) . '</p>';
+$this->tooltip_help_content['editortab'] = '<p>' . __( 'Filter users to display only users with editor access.', 'ah-o2' ) . '</p>';
+$this->tooltip_help_content['authortab'] = '<p>' . __( 'Filter users to display only users with author access.', 'ah-o2' ) . '</p>';
+$this->tooltip_help_content['contributortab'] = '<p>' . __( 'Filter users to display only users with contributor access.', 'ah-o2' ) . '</p>';
+$this->tooltip_help_content['subscribertab'] = '<p>' . __( 'Filter users to display only users with subscriber access.', 'ah-o2' ) . '</p>';
