@@ -8,6 +8,7 @@
 	-webkit-border-radius: 1px;
 	border-radius: 1px;
 	box-sizing: border-box;
+	position: absolute;
 
 }
 
@@ -20,6 +21,7 @@
 .arrow:after {
 	background: #f7f7f7;
 	border: 1px solid #CCC;
+	position: absolute;
 }
 
 .arrow {

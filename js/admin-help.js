@@ -42,7 +42,6 @@ function AdminHelp( helpitem ) {
 	 * @param object|array item Single help object or array of help objects
 	 */
 	this.add = function( item ) {
-		var tmpIcon;
 		if ( undefined === item ) {
 			return;
 		}
