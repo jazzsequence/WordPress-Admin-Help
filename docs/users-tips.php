@@ -1,5 +1,6 @@
 <?php
 
+$this->tooltip_help_content['alltab'] = '<p>' . __( 'Displays all the users registered on your site.', 'ah-o2' ) . '</p>';
 $this->tooltip_help_content['addnew'] = '<p>' . __( 'Add a new user to your site.', 'ah-o2' ) . '</p>';
 $this->tooltip_help_content['descriptioncolumn'] = '<p>' . __( 'Descriptions of currently available plugins', 'ah-o2' ) . '</p>';
 $this->tooltip_help_content['activatebutton'] = '<p>' . __( 'Activate this plugin', 'ah-o2' ) . '</p>';

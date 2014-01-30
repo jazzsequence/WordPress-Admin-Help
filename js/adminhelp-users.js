@@ -8,6 +8,13 @@ jQuery(function( $ ) {
 	 */
 	adminHelp.add([
 		{
+			slug: 'usersalltab',
+			selector: [
+				'.users-php .subsubsub li.all'
+			],
+			content: adminhelp_content.usersalltab
+		},
+		{
 			slug: 'addnew',
 			selector: [
 				'.add-new-h2'
