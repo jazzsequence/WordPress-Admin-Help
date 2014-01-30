@@ -10,16 +10,16 @@ jQuery(function( $ ) {
 		{
 			slug: 'usersalltab',
 			selector: [
-				'.users-php .subsubsub li.all'
+				'.users-php .subsubsub .all'
 			],
 			content: adminhelp_content.usersalltab
 		},
 		{
-			slug: 'addnew',
+			slug: 'usersaddnew',
 			selector: [
-				'.add-new-h2'
+				'.users-php .add-new-h2'
 			],
-			content: adminhelp_content.addnew
+			content: adminhelp_content.usersaddnew
 		},
 		{
 			slug: 'descriptioncolumn',
@@ -62,13 +62,6 @@ jQuery(function( $ ) {
 				'span.delete'
 			],
 			content: adminhelp_content.deletebutton
-		},
-		{
-			slug: 'alltab',
-			selector: [
-				'.subsubsub .all'
-			],
-			content: adminhelp_content.alltab
 		},
 		{
 			slug: 'activetab',
