@@ -15,7 +15,7 @@ function AdminHelp( helpitem ) {
 			items: '.tip-adminhelp',
 			content: function() {
 				var $this = $( this );
-				if ($this.attr( 'title' ) !== undefined){
+				if ( $this.attr( 'title' ) !== undefined ){
 					return $this.attr( 'title' );
 				} else if ( typeof $this.attr( 'data-slug' ) == 'string' ){
 					var item = $this.attr( 'data-slug' );
