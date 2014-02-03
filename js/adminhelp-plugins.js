@@ -31,35 +31,35 @@ jQuery(function( $ ) {
 		{
 			slug: 'activatebutton',
 			selector: [
-				'span.activate'
+				'span.activate a'
 			],
 			content: adminhelp_content.activatebutton
 		},
 		{
 			slug: 'deactivatebutton',
 			selector: [
-				'span.deactivate'
+				'span.deactivate a'
 			],
 			content: adminhelp_content.deactivatebutton
 		},
 		{
 			slug: 'editbutton',
 			selector: [
-				'span.edit'
+				'span.edit a'
 			],
 			content: adminhelp_content.editbutton
 		},
 		{
 			slug: 'settingsbutton',
 			selector: [
-				'span.settings'
+				'span.settings a'
 			],
 			content: adminhelp_content.settingsbutton
 		},
 		{
 			slug: 'deletebutton',
 			selector: [
-				'span.delete'
+				'span.delete a'
 			],
 			content: adminhelp_content.deletebutton
 		},
