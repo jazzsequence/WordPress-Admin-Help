@@ -136,7 +136,7 @@ class AH_O2_Admin {
 	public function init() {
 		$user = wp_get_current_user();
 		$this->show_tooltips = $user->has_prop( 'AH_O2_tooltips' ) ? $user->get( 'AH_O2_tooltips' ) : true;
-		$this->show_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : true;
+		$this->show_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : false;
 	}
 
 	/**
@@ -206,7 +206,7 @@ class AH_O2_Admin {
 	 */
 	public function AH_O2_show_profile_fields( $user ) {
 		$AH_O2_tooltips = $user->has_prop( 'AH_O2_tooltips' ) ? $user->get( 'AH_O2_tooltips' ) : true;
-		$AH_O2_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : true;
+		$AH_O2_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : false;
 
 	?>
 		        <tr id="Admin-Help">
