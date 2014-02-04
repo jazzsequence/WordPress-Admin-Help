@@ -639,6 +639,8 @@ class WP_Screen_Admin {
 		$admin_help_overview = $user->has_prop( 'AH_O2_overview' ) ? $user->get( 'AH_O2_overview' ) : false;
 		if( false == $admin_help_overview ) {
 			$help_class = 'hidden';
+		} else {
+			$help_class = '';
 		}
 		
 		// return if no help or screen options
