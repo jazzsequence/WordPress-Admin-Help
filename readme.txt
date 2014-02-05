@@ -1,5 +1,5 @@
 === AH-O&#8322; ===
-Contributors: jazzs3quence, ninnypants, brainfork, mdbitz, trishasalas, ubernaut
+Contributors: jazzs3quence, ninnypants, brainfork, mdbitz, jdgrimes, trishasalas, ubernaut
 Tags: Admin Help, WordPress Help, WordPress 4.0, help
 Requires at least: 3.6
 Tested up to: 3.8.1
