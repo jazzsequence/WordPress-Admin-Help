@@ -3,7 +3,7 @@ Contributors: jazzs3quence, ninnypants, brainfork, mdbitz, trishasalas, ubernaut
 Tags: Admin Help, WordPress Help, WordPress 4.0, help
 Requires at least: 3.6
 Tested up to: 3.8.1
-Stable tag: 0.4.0
+Stable tag: 0.5.0
 
 Breathing new life into WordPress admin help. An experimental feature plugin intended for WordPress 4.0.
 
@@ -39,9 +39,17 @@ We'd love it if you could join our weekly meetings in #wordpress-sfd on Freenode
 
 == Screenshots ==
 
-Not yet.
+There are some screenshots on the GitHub project page: https://github.com/jazzsequence/WordPress-Admin-Help
 
 == Changelog ==
+
+= 0.5 =
+* some tooltips added to Users page
+* resolved tooltip positioning issue
+* made tooltipp selectors more specific to remove default browser tooltips
+* configured tooltips to use title attribute, if available (note: this is a preliminary feature, may be removed, see https://github.com/jazzsequence/WordPress-Admin-Help/issues/41)
+* fixed undefined variable notice
+* fixed defaults for help overview settings
 
 = 0.4 =
 * new styling and javascript for tooltips

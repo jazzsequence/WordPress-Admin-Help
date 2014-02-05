@@ -4,19 +4,19 @@
  * @package   AH_O2
  * @author    Chris Reynolds <me@chrisreynolds.io>
  * @license   GPLv3
- * @link      http://make.wordpress.org/docs/tag/admin-help/
+ * @link      http://jazzsequence.github.io/WordPress-Admin-Help
  * @copyright 2013 Admin Help Team
  *
  * @wordpress-plugin
  * Plugin Name:       AH-O&#8322;
- * Plugin URI:        http://wordpress.org
+ * Plugin URI:        http://jazzsequence.github.io/WordPress-Admin-Help
  * Description:       Breathing new life into help in the WordPress admin. A feature plugin intended for WordPress 4.0
- * Version:           0.4.0
+ * Version:           0.5.0
  * Author:            The AH-O&#8322; Team
  * Author URI:        http://make.wordpress.org/docs/tag/admin-help/
  * Text Domain:       ah-o2
  * License:           GPLv3
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path:       /languages
  * GitHub Plugin URI: https://github.com/jazzsequence/WordPress-Admin-Help
  */
