@@ -87,7 +87,7 @@ jQuery(function( $ ) {
 		{
 			slug: 'updatetab',
 			selector: [
-				'.subsubsub .update'
+				'.subsubsub .upgrade'
 			],
 			content: adminhelp_content.updatetab
 		},
