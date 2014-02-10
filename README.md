@@ -12,14 +12,14 @@ A feature plugin intended for WordPress 4.0
 ###Screenshots
 
 ####This is what we have (so far):
-![Admin help settings](https://i.cloudup.com/PY7mNtqlJW-3000x3000.png)
+![Admin help settings](https://i.cloudup.com/5uYAoYANQr-3000x3000.png)
 Admin help settings
 
-![Help Overview](https://i.cloudup.com/Ax2tVGQwY9-3000x3000.png)
+![Help Overview](https://i.cloudup.com/eccrMDbLDr-2000x2000.png)
 Help Overview
 
-![Posts Tooltips](https://i.cloudup.com/gmCX2AHBbD-2000x2000.png)
-Posts page with Help Overview and first pass at tooltips
+![Users Tooltip](https://i.cloudup.com/KDGrcsrtkW-2000x2000.png)
+Users page with help overview and tooltips
 
 ####This is what we're shooting for:
 
