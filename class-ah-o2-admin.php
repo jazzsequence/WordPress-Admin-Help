@@ -153,6 +153,8 @@ class AH_O2_Admin {
 		wp_register_script( 'adminhelp-base', plugins_url( '/js/admin-help.js', __FILE__ ), array( 'jquery', 'jquery-ui-tooltip' ), '0.6.0' );
 		if ( $this->show_tooltips ) {
 			$this->initialize_help_content();
+			wp_enqueue_script( 'adminhelp-global', plugins_url( '/js/adminhelp-global.js', __FILE__ ), array( 'jquery', 'adminhelp-base' ), '0.6.0' );
+			wp_localize_script( 'adminhelp-global', 'adminhelp_content', $this->localize_page_plugins( array_keys( $this->tooltip_help_content ) ) );
 			$js_path = '/js/adminhelp-' . $screen->id . '.js';
 			if( file_exists( plugin_dir_path(__FILE__) . $js_path ) ) {
 				if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
@@ -260,6 +262,7 @@ class AH_O2_Admin {
 		//include tooltip content for current page
 		//supress the error if file doesn't exist
 		@include( plugin_dir_path(__FILE__) . '/docs/' . $current_screen->id . '-tips.php' );
+		@include( plugin_dir_path(__FILE__) . '/docs/global-tips.php' );
 	}
 
 	protected function localize_page_plugins( $parts = array() ) {
