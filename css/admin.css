@@ -30,8 +30,9 @@
 	overflow: hidden;
 	position: absolute;
 	left: 50%;
-	margin-left: -95px;
+	margin-left: -90px;
 	bottom: -16px;
+	border-bottom: 1px solid #f7f7f7;
 }
 .arrow.top {
 	top: -16px;
