@@ -69,9 +69,7 @@ jQuery(function( $ ) {
 			slug: 'username',
 			selector: [
 				'.profile-php .form-table label[for="user_login"]',
-				'.user-edit-php .form-table label[for="user_login"]',
-				'.profile-php .form-table input#user_login',
-				'.user-edit-php .form-table input#user_login'
+				'.user-edit-php .form-table label[for="user_login"]'
 			],
 			content: adminhelp_content.username
 		},
