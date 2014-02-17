@@ -10,65 +10,81 @@ jQuery(function( $ ) {
 		{
 			slug: 'userlogin',
 			selector: [
-				'.user-new-php .form-table input#user_login'
+				'.user-new-php .form-table input#user_login',
+				'label[for="user_login"]'
 			],
 			content: adminhelp_content.userlogin
 		},
 		{
 			slug: 'useremail',
 			selector: [
-				'.user-new-php .form-table input#email'
+				'.user-new-php .form-table input#email',
+				'label[for="email"]'
 			],
 			content: adminhelp_content.useremail
 		},
 		{
 			slug: 'userfirstname',
 			selector: [
-				'.user-new-php .form-table input#first_name'
+				'.user-new-php .form-table input#first_name',
+				'label[for="first_name"]'
 			],
 			content: adminhelp_content.userfirstname
 		},
 		{
 			slug: 'userlastname',
 			selector: [
-				'.user-new-php .form-table input#last_name'
+				'.user-new-php .form-table input#last_name',
+				'label[for="last_name"]'
 			],
 			content: adminhelp_content.userlastname
 		},
 		{
 			slug: 'userurl',
 			selector: [
-				'.user-new-php .form-table input#url'
+				'.user-new-php .form-table input#url',
+				'label[for="url"]'
 			],
 			content: adminhelp_content.userurl
 		},
 		{
 			slug: 'userpass1',
 			selector: [
-				'.user-new-php .form-table input#pass1'
+				'.user-new-php .form-table input#pass1',
+				'label[for="pass1"]'
 			],
 			content: adminhelp_content.userpass1
 		},
 		{
 			slug: 'userpass2',
 			selector: [
-				'.user-new-php .form-table input#pass2'
+				'.user-new-php .form-table input#pass2',
+				'label[for="pass2"]'
 			],
 			content: adminhelp_content.userpass2
 		},
 		{
 			slug: 'usersendpassword',
 			selector: [
-				'.user-new-php .form-table input#send_password'
+				'.user-new-php .form-table input#send_password',
+				'label[for="send_password"]'
 			],
 			content: adminhelp_content.usersendpassword
 		},
 		{
 			slug: 'userrole',
 			selector: [
-				'.user-new-php .form-table select#role'
+				'.user-new-php .form-table select#role',
+				'label[for="role"]'
 			],
 			content: adminhelp_content.userrole
+		},
+		{
+			slug: 'passwordstrength',
+			selector: [
+				'.user-new-php div#pass-strength-result'
+			],
+			content: adminhelp_content.passwordstrength
 		},
 		{
 			slug: 'strongpassword',
