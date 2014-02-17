@@ -10,13 +10,12 @@
 	box-sizing: border-box;
 	position: absolute;
 	z-index: 1000;
-
 }
 
 .ui-tooltip p {
 	color: #555;
 	font-size: 1em;
-	line-height: 1.8;
+	line-height: 1.8em;
 }
 
 .arrow:after {
@@ -141,7 +140,7 @@
 		width: 100%;
 		margin: 0 10px 0px 10px;
 	}
-	
+
 	.help-footer-menu {
 		float: right;
 		margin: 0px 10px 0px 0px;
@@ -162,19 +161,19 @@
 		margin: 0 10px 0px 10px;
 		width: 70%;
 	}
-	
+
 	.help-footer {
 		clear: both;
 		width: 70%;
 		text-align: right;
 	}
-	
+
 
 	.help-footer-menu {
 		float: right;
 		margin: 0px 0px 0px 10px;
 	}
-	
+
 }
 
 .help-footer-menu a {
