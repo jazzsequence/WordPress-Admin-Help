@@ -95,6 +95,14 @@ jQuery(function( $ ) {
 				'#adminmenu #collapse-menu #collapse-button'
 			],
 			content: adminhelp_content.collapsenav
+		},
+		{
+			slug: 'linksnav',
+			selector: [
+				'#adminmenu #menu-links .wp-menu-name',
+				'#adminmenu #menu-links .wp-menu-image'
+			],
+			content: adminhelp_content.linksnav
 		}
 	]);
 });
