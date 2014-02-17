@@ -36,7 +36,7 @@ jQuery(function( $ ) {
 			selector: [
 				'#adminmenu #menu-pages .wp-menu-name',
 				'#adminmenu #menu-pages .wp-menu-image'
-				
+
 			],
 			content: adminhelp_content.pagesnav
 		},
