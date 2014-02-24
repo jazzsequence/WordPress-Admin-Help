@@ -106,7 +106,7 @@
 }
 
 .screen-meta-icon {
-	padding: 3px 0;
+	padding: 1px 0;
 }
 
 #screen-options-wrap, #contextual-help-wrap {
@@ -123,7 +123,7 @@
 }
 
 .help-tab-content-icon {
-	padding: 0px 10px 0px 0px;
+	padding: 1px 10px 0px 0px;
 	font-size: 1.5em;
 	color: #0074A2;
 }
@@ -145,6 +145,7 @@
 	.help-footer-menu {
 		float: right;
 		margin: 0px 10px 0px 0px;
+        padding: 3px 0;
 	}
 
 }
@@ -173,6 +174,7 @@
 	.help-footer-menu {
 		float: right;
 		margin: 0px 0px 0px 10px;
+        padding: 3px 0;
 	}
 
 }
@@ -182,7 +184,7 @@
 }
 
 .screen-meta-footer-icon {
-	padding: 2px 0;
+	padding: 1px 0;
 }
 
 
