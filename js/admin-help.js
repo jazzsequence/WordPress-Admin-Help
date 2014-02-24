@@ -31,6 +31,9 @@ function AdminHelp( helpitem ) {
 					.addClass( feedback.horizontal )
 					.appendTo( this );
 				}
+			},
+			show: {
+				delay: 500
 			}
 		});
 	};
