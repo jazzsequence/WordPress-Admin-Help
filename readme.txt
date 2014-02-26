@@ -1,9 +1,9 @@
 === AH-O&#8322; ===
-Contributors: jazzs3quence, ninnypants, brainfork, mdbitz, jdgrimes, trishasalas, ubernaut
+Contributors: jazzs3quence, ninnypants, brainfork, mdbitz, jdgrimes, trishasalas, ubernaut, clorith
 Tags: Admin Help, WordPress Help, WordPress 4.0, help
 Requires at least: 3.6
 Tested up to: 3.8.1
-Stable tag: 0.6.0
+Stable tag: 0.6.1
 
 Breathing new life into WordPress admin help. An experimental feature plugin intended for WordPress 4.0.
 
@@ -42,6 +42,10 @@ We'd love it if you could join our weekly meetings in #wordpress-sfd on Freenode
 There are some screenshots on the GitHub project page: https://github.com/jazzsequence/WordPress-Admin-Help
 
 == Changelog ==
+
+= 0.6.1 =
+* fixes icon alignment in overviews
+* increases tooltip delay
 
 = 0.6 =
 * Corrected update tab selector on the plugins page
