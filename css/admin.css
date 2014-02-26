@@ -123,9 +123,11 @@
 }
 
 .help-tab-content-icon {
-	padding: 1px 10px 0px 0px;
+	padding: 0px 10px 0px 0px;
 	font-size: 1.5em;
 	color: #0074A2;
+	position: relative;
+	top: -2px;
 }
 
 @media screen and (max-width: 782px) {
@@ -184,7 +186,9 @@
 }
 
 .screen-meta-footer-icon {
-	padding: 1px 0;
+	padding: 0;
+	position: relative;
+	top: -1px;
 }
 
 
