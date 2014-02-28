@@ -38,7 +38,7 @@ jQuery(function( $ ) {
 		{
 			slug: 'trashfilter'
 			,selector: [
-				'.trash'
+				'li.trash'
 			],
 			content: adminhelp_content.trashfilter
 		}
