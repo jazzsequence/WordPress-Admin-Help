@@ -14,3 +14,4 @@ $this->tooltip_help_content['inactivetab'] = '<p>' . __( 'View all inactive plug
 $this->tooltip_help_content['updatetab'] = '<p>' . __( 'View all plugins with available updates', 'ah-o2' ) . '</p>';
 $this->tooltip_help_content['mustusetab'] = '<p>' . __( 'View all must use plugins', 'ah-o2' ) . '</p>';
 $this->tooltip_help_content['dropinstab'] = '<p>' . __( 'View drop in plugins', 'ah-o2' ) . '</p>';
+$this->tooltip_help_content['recentlyactivatedtab'] = '<p>' . __( 'View inactive plugins that were recently active', 'ah-o2' ) . '</p>';

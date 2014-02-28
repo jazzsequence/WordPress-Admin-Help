@@ -104,6 +104,13 @@ jQuery(function( $ ) {
 				'.subsubsub .dropins'
 			],
 			content: adminhelp_content.dropinstab
+		},
+		{
+			slug: 'recentlyactivatedtab',
+			selector: [
+				'.subsubsub .recently_activated'
+			],
+			content: adminhelp_content.recentlyactivatedtab
 		}
 	]);
 });
