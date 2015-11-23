@@ -11,7 +11,7 @@
  * Plugin Name:       AH-O&#8322;
  * Plugin URI:        http://jazzsequence.github.io/WordPress-Admin-Help
  * Description:       Breathing new life into help in the WordPress admin. A feature plugin intended for WordPress 4.0
- * Version:           0.6.1
+ * Version:           0.6.2
  * Author:            The AH-O&#8322; Team
  * Author URI:        http://make.wordpress.org/docs/tag/admin-help/
  * Text Domain:       ah-o2

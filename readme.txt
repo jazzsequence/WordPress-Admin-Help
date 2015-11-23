@@ -2,12 +2,16 @@
 Contributors: jazzs3quence, ninnypants, brainfork, mdbitz, jdgrimes, trishasalas, ubernaut, clorith
 Tags: Admin Help, WordPress Help, WordPress 4.0, help
 Requires at least: 3.6
-Tested up to: 3.8.1
-Stable tag: 0.6.1
+Tested up to: 4.0
+Stable tag: 0.6.2
 
 Breathing new life into WordPress admin help. An experimental feature plugin intended for WordPress 4.0.
 
 == Description ==
+
+This plugin is no longer in development. It is here for historic/archival purposes. If you would like to fork the code for your own use in a new plugin, you can find the source at the [GitHub Repository](https://github.com/jazzsequence/WordPress-Admin-Help).
+
+========
 
 Rethinking how WordPress handles help in the admin. Be sure and check the Changelog and FAQ for what's been added and where.
 
@@ -31,17 +35,20 @@ Most of what this plugin does (currently) is behind the scenes. We're working on
 
 Enable help tooltips from your Edit Profile page. The only page that currently has any tooltips activated is Plugins; you should have a tooltip when you hover over the Add New button.
 
-Report any issues or feature requests [here](https://github.com/jazzsequence/WordPress-Admin-Help/issues)
-
-= How do I submit documentation/get involved? =
-
-We'd love it if you could join our weekly meetings in #wordpress-sfd on Freenode. You can also catch up on what we're doing on http://make.wordpress.org/docs/tag/admin-help/
-
 == Screenshots ==
 
 There are some screenshots on the GitHub project page: https://github.com/jazzsequence/WordPress-Admin-Help
 
+== Upgrade Notice ==
+
+= 0.6.2 =
+
+This plugin is no longer in development. It is only here for historic/archival purposes.
+
 == Changelog ==
+
+= 0.6.2 =
+* update readme.txt
 
 = 0.6.1 =
 * fixes icon alignment in overviews
